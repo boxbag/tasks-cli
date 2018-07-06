@@ -4,7 +4,6 @@
   "description": "Personal task manager",
   "main": "bin/tasks",
   "dependencies": {
-    "array-sort": "^1.0.0",
     "commander": "^2.16.0",
     "d3-cloud": "^1.2.5",
     "fuzzy": "^0.1.3",

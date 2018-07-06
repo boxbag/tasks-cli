@@ -1,7 +1,6 @@
 'use strict';
 
 const _ = require('underscore');
-const arraySort = require('array-sort');
 const inquirer = require('inquirer');
 const uuidv4 = require('uuid/v4');
 const moment = require('moment');
@@ -19,13 +18,9 @@ inquirer.registerPrompt('autocomplete', require('inquirer-autocomplete-prompt'))
 
 console.log('Lets update your todo items!');
 
-function reverseCompare (prop) {
-    return function (a, b) {
-        return b[prop] < a[prop];
-    }
-}
-
-const updatedTasks = arraySort(inProgressTasks, reverseCompare('increment_count'), reverseCompare('score')).slice(0, 1).map(t => {
+const updatedTasks = inProgressTasks.sort(
+    (a, b) => { return (b.increment_count * -10000 + b.score) - (a.increment_count * -10000 + a.score); }
+).slice(0, 1).map(t => {
     return {
         name: `${t.score} [${t.responsibility_name}] ${t.name}`,
         value: t.id      

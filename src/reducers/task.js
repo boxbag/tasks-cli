@@ -91,6 +91,7 @@ module.exports = (tasks, event) => {
                     clonedTask.id = event.id;
                     clonedTask.created = event.created;
                     clonedTask.original_task_id = t.original_task_id;
+                    clonedTask.increment_count = 0;
 
                     tasks.push(clonedTask);
                 }
@@ -104,6 +105,7 @@ module.exports = (tasks, event) => {
                 t.punt_count += 1;
                 t.updated = event.created,
                 t.punt_reasons.push(event.data.punt_reason);
+                t.increment_count = 0;
             });
     } else if (event.name === 'CANCEL_TASK') {
         tasks
