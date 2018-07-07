@@ -5,13 +5,17 @@ const moment = require('moment');
 for (let i = 0; i < 3; i++) {
     let date = moment().add(i, 'day');
 
-    console.log(date.format('ddd YYYY-MM-DD') + '\n');
+    let relevantTasks;
 
-    let relevantTasks = require('./views/pending_tasks')(date.toDate());
+    if (i === 0) {
+        relevantTasks = require('./views/pending_tasks')(date.toDate());
+    } else {
+        relevantTasks = require('./views/pending_tasks_on_date')(date.toDate());
+    }
+
+    console.log(`\n${date.format('ddd YYYY-MM-DD')} - ${relevantTasks.length} Tasks\n`);
 
     let updatedTasks = relevantTasks.forEach(task => {
         console.log(`${task.score} [${task.responsibility_name}] ${task.name}`);
     });
-
-    console.log('\n');
 }
