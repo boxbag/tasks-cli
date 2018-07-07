@@ -5,9 +5,6 @@ var program = require('commander');
 program
     .command('add', 'Add a new task or responsibility')
     .alias('a')
-    .command('ls', 'List tasks')
-    .command('log', 'Generate a log of your actions')
-    .alias('l')
     .command('update', 'Update a task on your todo list')
     .alias('u')
     .command('review', 'Review your tasks impact')
@@ -15,6 +12,7 @@ program
     .command('stats', 'Generate a report of your performance')
     .alias('s')
     .command('plan', 'Generate a plan for the next few days')
-    .alias('p');
+    .alias('p')
+    .command('lv', 'Get a list of your values');
 
 program.parse(process.argv);
