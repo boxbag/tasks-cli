@@ -2,7 +2,7 @@
 
 var fuzzy = require('fuzzy');
 
-module.exports = function (responsibilities) {
+module.exports = function (responsibilities, values) {
     return [
         {
             type: 'autocomplete',
@@ -34,6 +34,16 @@ module.exports = function (responsibilities) {
             name: 'is_necessary',
             message: 'Is this task really necessary?',
             default: false
+        },
+        {
+            type: 'checkbox',
+            name: 'aligned_values',
+            message: 'Which values are this task aligned with?',
+            validate: require('./validators/required'),
+            when: function (answers) {
+                return answers.is_necessary === true && values.length > 0;
+            },
+            choices: values
         },
         {
             type: 'input',
