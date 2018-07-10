@@ -8,6 +8,8 @@ const path = require('path');
 
 const fs = require('fs');
 const responsibilities = require('./views/responsibilities');
+const valueEvents = require('../data/value_events.json');
+const values = valueEvents.reduce(require('./reducers/value'), []);
 
 const taskEvents = require('../data/task_events');
 const scoredTasks = require('./views/scored_tasks')
@@ -28,7 +30,7 @@ const updatedTasks = inProgressTasks.sort(
 });
 
 const todoQuestions = require('./questions/update_todo')(updatedTasks);
-const taskQuestions = require('./questions/task')(responsibilities);
+const taskQuestions = require('./questions/task')(responsibilities, values);
 
 if (inProgressTasks.length === 0) {
     console.log('You\'re all done for today! Go enjoy your life or add more tasks');

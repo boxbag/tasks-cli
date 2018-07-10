@@ -12,10 +12,8 @@ module.exports = (diffPoints, wordCloud) => {
             </head>
 
             <body>
-                <h1>Task Stats</h1>
-
-                <div id="line"></div>
-                <div id="vis"></div>
+                <div id="line" style="height:50%"></div>
+                <div id="scatter" style="height: 50%"></div>
 
                 <script>
                     var diffPointsData = ${JSON.stringify(diffPoints)};
@@ -33,6 +31,20 @@ module.exports = (diffPoints, wordCloud) => {
                     });
 
                     lineChart.renderTo('#line');
+
+                    var scatterChart = new tauCharts.Chart({
+                        data: diffPointsData,
+                        type: 'stacked-bar',
+                        x: 'completed_date',
+                        y: 'actual_duration',
+                        color: 'responsibility_name',
+                        plugins:  [
+    tauCharts.api.plugins.get('tooltip')(),
+    tauCharts.api.plugins.get('legend')()
+    ]
+                    });
+
+                    scatterChart.renderTo('#scatter');
                 </script>
             </body>
         </html>
