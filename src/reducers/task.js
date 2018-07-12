@@ -138,7 +138,9 @@ module.exports = (tasks, event) => {
         tasks
             .filter(t => t.id === event.data.chosen_todo_item)
             .forEach(t => {
-                t.increment_count += 1;
+                if (moment(event.created).startOf('day').toDate().getTime() === moment().startOf('day').toDate().getTime()) {
+                    t.increment_count += 1;
+                }
             });
     }
 

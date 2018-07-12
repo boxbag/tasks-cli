@@ -69,7 +69,10 @@ module.exports = function (responsibilities, values) {
             message: 'How many minutes do you expect this task to take?',
             default: '30',
             validate: require('./validators/positive_number'),
-            filter: Number
+            filter: Number,
+            when: function (answers) {
+                return answers.is_necessary === true;
+            }
         },
         {
             type: 'list',
