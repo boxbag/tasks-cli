@@ -5,6 +5,7 @@ const inquirer = require('inquirer');
 const uuidv4 = require('uuid/v4');
 const moment = require('moment');
 const path = require('path');
+const colors = require('colors');
 
 const fs = require('fs');
 const responsibilities = require('./views/responsibilities');
@@ -33,7 +34,7 @@ const taskQuestions = require('./questions/task')(responsibilities, values);
 if (inProgressTasks.length === 0) {
     console.log('You\'re all done for today! Go enjoy your life or add more tasks');
 } else {
-    console.log(`\n${updatedTasks[0].name}\n`);
+    console.log(`\n${colors.green(updatedTasks[0].name)}\n`);
 
     inquirer.prompt(todoQuestions).then(answers => {
         if (answers.action === 'Complete') {
