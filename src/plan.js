@@ -3,7 +3,7 @@
 const moment = require('moment');
 const colors = require('colors');
 
-for (let i = 0; i < 3; i++) {
+for (let i = 2; i >= 0; i--) {
     let date = moment().add(i, 'day');
 
     let relevantTasks;
