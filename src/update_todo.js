@@ -43,10 +43,8 @@ if (inProgressTasks.length === 0) {
                 created: moment().toDate().toISOString(),
                 name: 'COMPLETE_TASK',
                 data: {
-                    chosen_todo_item: updatedTasks[0].value,
-                    complete_action: answers.complete_action,
-                    task_feeling: answers.task_feeling,
-                    actual_duration: answers.actual_duration
+                    ...answers,
+                    chosen_todo_item: updatedTasks[0].value
                 }
             });
 
@@ -69,9 +67,8 @@ if (inProgressTasks.length === 0) {
                 created: moment().toDate().toISOString(),
                 name: 'PUNT_TASK',
                 data: {
-                    chosen_todo_item: updatedTasks[0].value,
-                    new_start_date: answers.new_start_date,
-                    punt_reason: answers.punt_reason
+                    ...answers,
+                    chosen_todo_item: updatedTasks[0].value
                 }
             });
         } else if (answers.action === 'Cancel') {
@@ -80,8 +77,8 @@ if (inProgressTasks.length === 0) {
                 created: moment().toDate().toISOString(),
                 name: 'CANCEL_TASK',
                 data: {
-                    chosen_todo_item: updatedTasks[0].value,
-                    cancellation_reason: answers.cancellation_reason
+                    ...answers,
+                    chosen_todo_item: updatedTasks[0].value
                 }
             });
         } else if (answers.action === 'Increment') {
@@ -90,9 +87,8 @@ if (inProgressTasks.length === 0) {
                 created: moment().toDate().toISOString(),
                 name: 'INCREMENT_TASK',
                 data: {
-                    chosen_todo_item: updatedTasks[0].value,
-                    increment_action: answers.increment_action,
-                    increment_feeling: answers.increment_feeling
+                    ...answers,
+                    chosen_todo_item: updatedTasks[0].value
                 }
             });
         }

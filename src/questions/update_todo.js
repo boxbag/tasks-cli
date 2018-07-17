@@ -57,6 +57,23 @@ module.exports = [
     },
     {
         type: 'confirm',
+        name: 'is_documented',
+        message: 'Did you document the results of this task?',
+        when: function (answers) {
+            return answers.action === 'Complete';
+        }
+    },
+    {
+        type: 'input',
+        name: 'documentation_link',
+        message: 'What is the link to this documentation?',
+        validate: require('./validators/required'),
+        when: function (answers) {
+            return answers.action === 'Complete' && answers.is_documented;
+        }
+    },
+    {
+        type: 'confirm',
         name: 'should_follow_up',
         message: 'Do you need to follow up and do something else after this?',
         when: function (answers) {
