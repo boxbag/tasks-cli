@@ -20,15 +20,6 @@ module.exports = [
     },
     {
         type: 'input',
-        name: 'increment_feeling',
-        message: 'How did you feel while incrementing this task?',
-        validate: require('./validators/required'),
-        when: function (answers) {
-            return answers.action === 'Increment';
-        }
-    },
-    {
-        type: 'input',
         name: 'complete_action',
         message: 'What did you do to complete this task?',
         validate: require('./validators/required'),
