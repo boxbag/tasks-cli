@@ -89,17 +89,26 @@ module.exports = function (responsibilities, values) {
         {
             type: 'input',
             name: 'recurring_schedule',
-            message: 'How often does this task recur?',
+            message: 'How often does this task recur? (1 for every week, 2 for every other, ...)',
+            validate: require('./validators/positive_number'),
             when: function (answers) {
-                return answers.is_necessary === true && answers.recurring_type !== 'One time';
+                return answers.is_necessary === true && answers.recurring_type === 'Weekly';
+            }
+        },
+        {
+            type: 'confirm',
+            name: 'does_stop_recurring',
+            message: 'Does this task stop recurring after some number of iterations?',
+            when: function (answers) {
+                return answers.is_necessary === true && answers.recurring_type === 'Weekly';
             }
         },
         {
             type: 'input',
             name: 'stop_recurrence_after',
-            message: 'After how many times should the recurrence stop? (type \'never\' if task recurs forever)',
+            message: 'After how many times should the recurrence stop?',
             when: function (answers) {
-                return answers.is_necessary === true && answers.recurring_type !== 'One time';
+                return answers.is_necessary === true && answers.recurring_type !== 'One time' && answers.does_stop_recurring === true;
             }
         },
         {

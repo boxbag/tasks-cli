@@ -10,7 +10,7 @@ function calculateShouldRecur (t, tasks, now) {
 
     if (t.recurring_type === 'One time') {
         return false;
-    } else if (t.stop_recurrence_after === 'never') {
+    } else if (t.does_stop_recurring === false) {
         if (t.recurring_type === 'Weekly') {
             var starting = moment(t.start_date).add(1, 'day').startOf('day');
 
@@ -55,6 +55,7 @@ module.exports = (tasks, event) => {
             start_date: moment(event.data.start_date).startOf('day').toDate().toISOString(),
             recurring_type: event.data.recurring_type,
             recurring_schedule: event.data.recurring_schedule,
+            does_stop_recurring: event.data.does_stop_recurring,
             stop_recurrence_after: event.data.stop_recurrence_after,
             recurring_days: event.data.recurring_days,
             can_automate: event.data.can_automate,
