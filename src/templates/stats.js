@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = (diffPoints, wordCloud) => {
+module.exports = (diffPoints, delegationData) => {
     return `
         <html>
             <head>
@@ -14,9 +14,11 @@ module.exports = (diffPoints, wordCloud) => {
             <body>
                 <div id="line" style="height:50%"></div>
                 <div id="scatter" style="height: 50%"></div>
+                <div id="delegation" style="height: 50%"></div>
 
                 <script>
                     var diffPointsData = ${JSON.stringify(diffPoints)};
+                    var delegationData = ${JSON.stringify(delegationData)};
 
                     var lineChart = new tauCharts.Chart({
                         data: diffPointsData,
@@ -45,6 +47,20 @@ module.exports = (diffPoints, wordCloud) => {
                     });
 
                     scatterChart.renderTo('#scatter');
+
+                    var delegationChart = new tauCharts.Chart({
+                        data: delegationData,
+                        type: 'stacked-bar',
+                        x: 'completed_date',
+                        y: 'count',
+                        color: 'type',
+                        plugins:  [
+    tauCharts.api.plugins.get('tooltip')(),
+    tauCharts.api.plugins.get('legend')()
+    ]
+                    });
+
+                    delegationChart.renderTo('#delegation');
                 </script>
             </body>
         </html>
