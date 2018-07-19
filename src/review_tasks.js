@@ -34,17 +34,8 @@ const sortedCompletedTasks = _.sortBy(completedTasks, t => -moment(t.review_date
                 name: 'REVIEW_TASK',
                 created: moment().toDate().toISOString(),
                 data: {
-                    task_id: completedTask.id,
-                    was_necessary: answers.was_necessary,
-                    explain_was_necessary: answers.explain_was_necessary,
-                    review_impact: answers.review_impact,
-                    explain_review_impact: answers.explain_review_impact,
-                    review_urgency: answers.review_urgency,
-                    explain_review_urgency: answers.explain_review_urgency,
-                    can_automate_review: answers.can_automate_review,
-                    explain_automate_review: answers.explain_automate_review,
-                    can_delegate_review: answers.can_delegate_review,
-                    explain_delegate_review: answers.explain_delegate_review
+                    ...answers,
+                    task_id: completedTask.id
                 }
             });
         } else {
