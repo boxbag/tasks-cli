@@ -1,9 +1,11 @@
 'use strict';
 
 const moment = require('moment');
+const colors = require('colors');
 
 module.exports = function (task) {
-    console.log(`\nLet's review "${task.name}" on ${moment(task.completed_date).format('YYYY-MM-DD')}, you did "${task.complete_action}" to complete it.\n`);
+    console.log(`\n${colors.yellow(moment(task.completed_date).format('ddd YYYY-MM-DD'))} ${colors.green(task.name)}\n`);
+    console.log(`${task.complete_action}\n`);
 
     return [
         {
