@@ -21,6 +21,7 @@ inquirer.registerPrompt('datetime', require('inquirer-datepicker-prompt'));
 console.log('\nLet\'s do something new!\n'.green);
 
 const questions = require('./questions/next')(responsibilities);
+const initialResponsibilityQuestions = require('./questions/initial_responsibility');
 const responsibilityQuestions = require('./questions/responsibility');
 const initialTaskQuestions = require('./questions/initial_task')(responsibilities);
 const taskQuestions = require('./questions/task')(values);
@@ -30,16 +31,23 @@ const valueQuestions = require('./questions/value');
     const answers = await inquirer.prompt(questions);
 
     if (answers.type === 'Responsibility') {
-        const responsibilityAnswers = await inquirer.prompt(responsibilityQuestions);
-        
-        responsibilityEvents.push({
-            id: uuidv4(),
-            name: 'CREATE_RESPONSIBILITY',
-            created: moment().toDate().toISOString(),
-            data: responsibilityAnswers
-        });
+        const initialResponsibilityAnswers = await inquirer.prompt(initialResponsibilityQuestions);
 
-        fs.writeFileSync(path.join(__dirname, '../data/responsibility_events.json'), JSON.stringify(responsibilityEvents, null, 4));
+        if (initialResponsibilityAnswers.is_necessary === true) {
+            const responsibilityAnswers = await inquirer.prompt(responsibilityQuestions);
+
+            responsibilityEvents.push({
+                id: uuidv4(),
+                name: 'CREATE_RESPONSIBILITY',
+                created: moment().toDate().toISOString(),
+                data: {
+                    ...initialResponsibilityAnswers,
+                    ...responsibilityAnswers
+                }
+            });
+
+            fs.writeFileSync(path.join(__dirname, '../data/responsibility_events.json'), JSON.stringify(responsibilityEvents, null, 4));
+        }
     } else if (answers.type === 'Task') {
         const initialTaskAnswers = await inquirer.prompt(initialTaskQuestions);
 
