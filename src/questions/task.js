@@ -2,45 +2,14 @@
 
 var fuzzy = require('fuzzy');
 
-module.exports = function (responsibilities, values) {
+module.exports = function (values) {
     return [
-        {
-            type: 'autocomplete',
-            name: 'responsibility',
-            message: 'Which responsibility is this task related to?',
-            source: (answers, input) => {
-                input = input || '';
-
-                return new Promise(resolve => {
-                    var fuzzyResult = fuzzy.filter(input, responsibilities.map(r => r.name));
-
-                    resolve(fuzzyResult.map(el => {
-                        return {
-                            name: el.original,
-                            value: responsibilities[el.index].id
-                        };
-                    }));
-                });
-            }
-        },
-        {
-            type: 'input',
-            name: 'name',
-            message: 'What is the name of your task?',
-            validate: require('./validators/required')
-        },
-        {
-            type: 'confirm',
-            name: 'is_necessary',
-            message: 'Is this task really necessary?',
-            default: false
-        },
         {
             type: 'checkbox',
             name: 'aligned_values',
             message: 'Which values are this task aligned with?',
             when: function (answers) {
-                return answers.is_necessary === true && values.length > 0;
+                return values.length > 0;
             },
             choices: values
         },
@@ -48,19 +17,13 @@ module.exports = function (responsibilities, values) {
             type: 'input',
             name: 'necessary_reason',
             message: 'Why do we absolutely need this?',
-            validate: require('./validators/required'),
-            when: function (answers) {
-                return answers.is_necessary === true;
-            }
+            validate: require('./validators/required')
         },
         {
             type: 'datetime',
             name: 'start_date',
             message: 'What date does this task start?',
-            format: ['dddd', ' ', 'mm', '/', 'dd', '/', 'yyyy'],
-            when: function (answers) {
-                return answers.is_necessary === true;
-            }
+            format: ['dddd', ' ', 'mm', '/', 'dd', '/', 'yyyy']
         },
         {
             type: 'input',
@@ -68,18 +31,12 @@ module.exports = function (responsibilities, values) {
             message: 'How many minutes do you expect this task to take?',
             default: '30',
             validate: require('./validators/positive_number'),
-            filter: Number,
-            when: function (answers) {
-                return answers.is_necessary === true;
-            }
+            filter: Number
         },
         {
             type: 'list',
             name: 'recurring_type',
             message: 'What type of recurrence is this task?',
-            when: function (answers) {
-                return answers.is_necessary === true;
-            },
             choices: [
                 'One time',
                 'Weekly'
@@ -92,7 +49,7 @@ module.exports = function (responsibilities, values) {
             message: 'How often does this task recur? (1 for every week, 2 for every other, ...)',
             validate: require('./validators/positive_number'),
             when: function (answers) {
-                return answers.is_necessary === true && answers.recurring_type === 'Weekly';
+                return answers.recurring_type === 'Weekly';
             }
         },
         {
@@ -100,7 +57,7 @@ module.exports = function (responsibilities, values) {
             name: 'does_stop_recurring',
             message: 'Does this task stop recurring after some number of iterations?',
             when: function (answers) {
-                return answers.is_necessary === true && answers.recurring_type === 'Weekly';
+                return answers.recurring_type === 'Weekly';
             }
         },
         {
@@ -108,7 +65,7 @@ module.exports = function (responsibilities, values) {
             name: 'stop_recurrence_after',
             message: 'After how many times should the recurrence stop?',
             when: function (answers) {
-                return answers.is_necessary === true && answers.recurring_type !== 'One time' && answers.does_stop_recurring === true;
+                return answers.recurring_type !== 'One time' && answers.does_stop_recurring === true;
             }
         },
         {
@@ -116,7 +73,7 @@ module.exports = function (responsibilities, values) {
             name: 'recurring_days',
             message: 'Which days does this task recur on?',
             when: function (answers) {
-                return answers.is_necessary === true && answers.recurring_type === 'Weekly';
+                return answers.recurring_type === 'Weekly';
             },
             choices: [
                 {
@@ -152,10 +109,7 @@ module.exports = function (responsibilities, values) {
         {
             type: 'confirm',
             name: 'can_automate',
-            message: 'Can this task be automated right now?',
-            when: function (answers) {
-                return answers.is_necessary === true;
-            }
+            message: 'Can this task be automated right now?'
         },
         {
             type: 'input',
@@ -163,7 +117,7 @@ module.exports = function (responsibilities, values) {
             message: 'How do we automate this task?',
             validate: require('./validators/required'),
             when: function (answers) {
-                return answers.is_necessary === true && answers.can_automate === true;
+                return answers.can_automate === true;
             }
         },
         {
@@ -172,16 +126,13 @@ module.exports = function (responsibilities, values) {
             message: 'Why can\'t we automate this right now?',
             validate: require('./validators/required'),
             when: function (answers) {
-                return answers.is_necessary === true && answers.can_automate === false;
+                return answers.can_automate === false;
             }
         },
         {
             type: 'confirm',
             name: 'can_delegate',
-            message: 'Can this task be delegated right now?',
-            when: function (answers) {
-                return answers.is_necessary === true;
-            }
+            message: 'Can this task be delegated right now?'
         },
         {
             type: 'input',
@@ -189,7 +140,7 @@ module.exports = function (responsibilities, values) {
             message: 'Who do we delegate this to?',
             validate: require('./validators/required'),
             when: function (answers) {
-                return answers.is_necessary === true && answers.can_delegate === true;
+                return answers.can_delegate === true;
             }
         },
         {
@@ -198,7 +149,7 @@ module.exports = function (responsibilities, values) {
             message: 'Why can\'t you delegate this right now?',
             validate: require('./validators/required'),
             when: function (answers) {
-                return answers.is_necessary === true && answers.can_delegate === false;
+                return answers.can_delegate === false;
             }
         },
         {
@@ -206,38 +157,26 @@ module.exports = function (responsibilities, values) {
             name: 'impact',
             message: 'What is the near term impact of this task? (1-10)',
             validate: require('./validators/number_scale'),
-            filter: Number,
-            when: function (answers) {
-                return answers.is_necessary === true;
-            }
+            filter: Number
         },
         {
             type: 'input',
             name: 'explain_impact',
             message: 'Why is this task impactful?',
-            validate: require('./validators/required'),
-            when: function (answers) {
-                return answers.is_necessary === true;
-            }
+            validate: require('./validators/required')
         },
         {
             type: 'input',
             name: 'urgency',
             message: 'What is the urgency of this? (1-10)',
             validate: require('./validators/number_scale'),
-            filter: Number,
-            when: function (answers) {
-                return answers.is_necessary === true;
-            }
+            filter: Number
         },
         {
             type: 'input',
             name: 'explain_urgency',
             message: 'Why is this urgent?',
-            validate: require('./validators/required'),
-            when: function (answers) {
-                return answers.is_necessary === true;
-            }
+            validate: require('./validators/required')
         }
     ];
 };
