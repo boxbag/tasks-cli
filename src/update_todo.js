@@ -32,67 +32,69 @@ const todoQuestions = require('./questions/update_todo');
 const taskQuestions = require('./questions/task')(responsibilities, values);
 
 if (inProgressTasks.length === 0) {
-    console.log('You\'re all done for today! Go enjoy your life or add more tasks');
-} else {
-    console.log(`\n${colors.green(updatedTasks[0].name)}\n`);
+    return console.log('\nYou\'re all done for today! Go enjoy your life or add more tasks\n'.green);
+}
 
-    inquirer.prompt(todoQuestions).then(answers => {
-        if (answers.action === 'Complete') {
-            taskEvents.push({
-                id: uuidv4(),
-                created: moment().toDate().toISOString(),
-                name: 'COMPLETE_TASK',
-                data: {
-                    ...answers,
-                    chosen_todo_item: updatedTasks[0].value
-                }
-            });
+console.log(`\n${colors.green(updatedTasks[0].name)}\n`);
 
-            if (answers.should_follow_up) {
-                return inquirer.prompt(taskQuestions).then(taskAnswers => {
-                    taskEvents.push({
-                        id: uuidv4(),
-                        name: 'CREATE_TASK',
-                        created: moment().toDate().toISOString(),
-                        data: {
-                            ...taskAnswers,
-                            last_task_id: updatedTasks[0].value
-                        }
-                    });
-                });
+(async function () {
+    const answers = await inquirer.prompt(todoQuestions);
+    
+    if (answers.action === 'Complete') {
+        taskEvents.push({
+            id: uuidv4(),
+            created: moment().toDate().toISOString(),
+            name: 'COMPLETE_TASK',
+            data: {
+                ...answers,
+                chosen_todo_item: updatedTasks[0].value
             }
-        } else if (answers.action === 'Punt') {
-            taskEvents.push({
-                id: uuidv4(),
-                created: moment().toDate().toISOString(),
-                name: 'PUNT_TASK',
-                data: {
-                    ...answers,
-                    chosen_todo_item: updatedTasks[0].value
-                }
-            });
-        } else if (answers.action === 'Cancel') {
-            taskEvents.push({
-                id: uuidv4(),
-                created: moment().toDate().toISOString(),
-                name: 'CANCEL_TASK',
-                data: {
-                    ...answers,
-                    chosen_todo_item: updatedTasks[0].value
-                }
-            });
-        } else if (answers.action === 'Increment') {
-            taskEvents.push({
-                id: uuidv4(),
-                created: moment().toDate().toISOString(),
-                name: 'INCREMENT_TASK',
-                data: {
-                    ...answers,
-                    chosen_todo_item: updatedTasks[0].value
-                }
+        });
+
+        if (answers.should_follow_up) {
+            return inquirer.prompt(taskQuestions).then(taskAnswers => {
+                taskEvents.push({
+                    id: uuidv4(),
+                    name: 'CREATE_TASK',
+                    created: moment().toDate().toISOString(),
+                    data: {
+                        ...taskAnswers,
+                        last_task_id: updatedTasks[0].value
+                    }
+                });
             });
         }
-    }).then(() => {
-        fs.writeFileSync(path.join(__dirname, '../data/task_events.json'), JSON.stringify(taskEvents, null, 4));
-    });
-}
+    } else if (answers.action === 'Punt') {
+        taskEvents.push({
+            id: uuidv4(),
+            created: moment().toDate().toISOString(),
+            name: 'PUNT_TASK',
+            data: {
+                ...answers,
+                chosen_todo_item: updatedTasks[0].value
+            }
+        });
+    } else if (answers.action === 'Cancel') {
+        taskEvents.push({
+            id: uuidv4(),
+            created: moment().toDate().toISOString(),
+            name: 'CANCEL_TASK',
+            data: {
+                ...answers,
+                chosen_todo_item: updatedTasks[0].value
+            }
+        });
+    } else if (answers.action === 'Increment') {
+        taskEvents.push({
+            id: uuidv4(),
+            created: moment().toDate().toISOString(),
+            name: 'INCREMENT_TASK',
+            data: {
+                ...answers,
+                chosen_todo_item: updatedTasks[0].value
+            }
+        });
+    }
+    
+    fs.writeFileSync(path.join(__dirname, '../data/task_events.json'), JSON.stringify(taskEvents, null, 4));
+})();
