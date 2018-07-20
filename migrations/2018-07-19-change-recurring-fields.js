@@ -6,6 +6,8 @@ const updatedTaskEvents = taskEvents.map(t => {
     if (t.data.stop_recurrence_after === 'never') {
         t.data.does_stop_recurring = false;
     }
+
+    return t;
 });
 
 // fs.writeFileSync(path.join(__dirname, '../data/taskEvents.json'), JSON.stringify(updatedTaskEvents, null, 4));
