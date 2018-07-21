@@ -81,6 +81,7 @@ module.exports = (tasks, event) => {
                 t.completed_date = event.created;
                 t.review_date = moment(event.created).startOf('day').add(14, 'days').toDate().toISOString();
                 t.complete_action = event.data.complete_action;
+                t.complete_feeling = event.data.task_feeling;
                 t.actual_duration = event.data.actual_duration;
 
                 let recurrence = calculateShouldRecur(t, tasks, event.created);
