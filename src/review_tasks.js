@@ -25,7 +25,10 @@ const completedTasks = scoredTasks
     .filter(t => t.status === 'COMPLETED')
     .filter(t => moment(t.review_date).startOf('day').toDate() <= moment().startOf('day').toDate());
 
-const sortedCompletedTasks = _.sortBy(completedTasks, t => -moment(t.review_date).toDate().getTime());
+const sortedCompletedTasks = _.sortBy(
+    _.sortBy(completedTasks, t => -moment(t.review_date).toDate().getTime()),
+    t => -t.score
+);
 
 (async function () {
     for (let completedTask of sortedCompletedTasks) {
