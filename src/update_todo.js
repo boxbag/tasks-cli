@@ -24,7 +24,12 @@ const updatedTasks = inProgressTasks.sort(
 ).slice(0, 1).map(t => {
     return {
         name: `${t.score} [${t.responsibility_name}] ${t.name}`,
-        value: t.id      
+        necessary_reason: t.necessary_reason,
+        can_delegate: t.can_delegate,
+        delegate: t.delegate,
+        can_automate: t.can_automate,
+        automation_task: t.automation_task,
+        value: t.id
     };
 });
 
@@ -37,6 +42,21 @@ if (inProgressTasks.length === 0) {
 }
 
 console.log(`\n${colors.green(updatedTasks[0].name)}\n`);
+console.log(`${colors.yellow(updatedTasks[0].necessary_reason)}\n`);
+
+if (updatedTasks[0].can_delegate) {
+    console.log(`Delegate: ${colors.cyan(updatedTasks[0].delegate)}`);
+} else {
+    console.log(`Delegate: ${colors.cyan('Consider pairing up on this task')}`);
+}
+
+if (updatedTasks[0].can_automate) {
+    console.log(`Automation Task: ${colors.cyan(updatedTasks[0].automation_task)}`);
+} else {
+    console.log(`Automation Task: ${colors.cyan('Consider automating a portion of this task')}`);
+}
+
+console.log('');
 
 (async function () {
     const answers = await inquirer.prompt(todoQuestions);
