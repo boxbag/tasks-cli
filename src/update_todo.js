@@ -29,7 +29,8 @@ const updatedTasks = inProgressTasks.sort(
 });
 
 const todoQuestions = require('./questions/update_todo');
-const taskQuestions = require('./questions/task')(responsibilities, values);
+const initialTaskQuestions = require('./questions/initial_task')(responsibilities);
+const taskQuestions = require('./questions/task')(values);
 
 if (inProgressTasks.length === 0) {
     return console.log('\nYou\'re all done for today! Go enjoy your life or add more tasks\n'.green);
@@ -52,17 +53,22 @@ console.log(`\n${colors.green(updatedTasks[0].name)}\n`);
         });
 
         if (answers.should_follow_up) {
-            return inquirer.prompt(taskQuestions).then(taskAnswers => {
+            const initialTaskAnswers = await inquirer.prompt(initialTaskQuestions);
+
+            if (initialTaskAnswers.is_necessary === true) {
+                const taskAnswers = await inquirer.prompt(taskQuestions);
+
                 taskEvents.push({
                     id: uuidv4(),
                     name: 'CREATE_TASK',
                     created: moment().toDate().toISOString(),
                     data: {
+                        ...initialTaskAnswers,
                         ...taskAnswers,
                         last_task_id: updatedTasks[0].value
                     }
                 });
-            });
+            }
         }
     } else if (answers.action === 'Punt') {
         taskEvents.push({
