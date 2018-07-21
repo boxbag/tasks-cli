@@ -17,6 +17,8 @@ for (let i = 2; i >= 0; i--) {
     console.log(`\n${date.format('ddd YYYY-MM-DD')} - ${relevantTasks.length} Tasks\n`.yellow);
 
     let updatedTasks = relevantTasks.forEach(task => {
-        console.log(`${task.score} [${task.responsibility_name}] ${task.name}`);
+        console.log(`${task.score} [${task.responsibility_name}] ${task.name}`.green);
     });
 }
+
+console.log('');
