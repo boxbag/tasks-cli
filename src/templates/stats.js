@@ -4,11 +4,11 @@ module.exports = (diffPoints, delegationData) => {
     return `
         <html>
             <head>
-                <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/taucharts/latest/tauCharts.min.css">
-                <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+                <link rel="stylesheet" type="text/css" href="css/tauCharts.min.css">
+                <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
 
-                <script src="https://d3js.org/d3.v3.min.js" charset="utf-8" type="text/javascript"></script>
-                <script src="https://cdn.jsdelivr.net/taucharts/latest/tauCharts.min.js" type="text/javascript"></script>
+                <script src="js/d3.min.js" charset="utf-8" type="text/javascript"></script>
+                <script src="js/tauCharts.min.js" type="text/javascript"></script>
             </head>
 
             <body>
