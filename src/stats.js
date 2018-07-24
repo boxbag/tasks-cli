@@ -19,7 +19,8 @@ const recentFinishedTasks = _.sortBy(
         score: t.score,
         name: t.name,
         responsibility_name: t.responsibility_name,
-        actual_duration: t.actual_duration
+        actual_duration: t.actual_duration,
+        can_delegate: t.can_delegate
     };
 });
 
