@@ -165,12 +165,6 @@ module.exports = function (values) {
             message: 'What is the urgency of this? (1-10)',
             validate: require('./validators/number_scale'),
             filter: Number
-        },
-        {
-            type: 'input',
-            name: 'explain_urgency',
-            message: 'Why is this urgent?',
-            validate: require('./validators/required')
         }
     ];
 };

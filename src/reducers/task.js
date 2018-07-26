@@ -67,7 +67,6 @@ module.exports = (tasks, event) => {
             impact: event.data.impact,
             estimated_duration: event.data.estimated_duration || 30,
             urgency: event.data.urgency,
-            explain_urgency: event.data.explain_urgency,
             original_task_id: event.id,
             increment_count: 0
         });
