@@ -65,7 +65,6 @@ module.exports = (tasks, event) => {
             delegate: event.data.delegate,
             reason_cannot_delegate: event.data.reason_cannot_delegate,
             impact: event.data.impact,
-            explain_impact: event.data.explain_impact,
             estimated_duration: event.data.estimated_duration || 30,
             urgency: event.data.urgency,
             explain_urgency: event.data.explain_urgency,

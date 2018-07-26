@@ -161,12 +161,6 @@ module.exports = function (values) {
         },
         {
             type: 'input',
-            name: 'explain_impact',
-            message: 'Why is this task impactful?',
-            validate: require('./validators/required')
-        },
-        {
-            type: 'input',
             name: 'urgency',
             message: 'What is the urgency of this? (1-10)',
             validate: require('./validators/number_scale'),
