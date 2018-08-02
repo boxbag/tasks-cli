@@ -28,10 +28,11 @@ module.exports = [
         }
     },
     {
-        type: 'input',
+        type: 'list',
         name: 'task_feeling',
         message: 'How did you feel while doing this task?',
-        validate: require('./validators/required'),
+        choices: ['Stressed', 'Neutral', 'In Flow'],
+        default: 'Neutral',
         when: function (answers) {
             return answers.action === 'Complete';
         }
