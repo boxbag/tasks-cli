@@ -10,6 +10,8 @@ const scoredTasks = require('./views/scored_tasks');
 const taskReviewQuestionaire = require('./questions/task_review');
 const taskQuestionaire = require('./questions/task');
 
+const taskReviewPrinter = require('./printers/task_review');
+
 const completedTasks = scoredTasks
     .filter(t => t.status === 'COMPLETED')
     .filter(t => moment(t.review_date).startOf('day').toDate() <= moment().startOf('day').toDate());
@@ -21,9 +23,7 @@ const sortedCompletedTasks = _.sortBy(
 
 (async function () {
     for (let completedTask of sortedCompletedTasks) {
-        console.log(`\n${colors.yellow(moment(task.completed_date).format('ddd YYYY-MM-DD'))} ${colors.green(task.name)}\n`);
-        console.log(`You did: ${colors.cyan(task.complete_action)}`);
-        console.log(`You felt: ${colors.cyan(task.complete_feeling)}\n`);
+        taskReviewPrinter(completedTask);
         
         let answers = await taskReviewQuestionaire(completedTask);
 
