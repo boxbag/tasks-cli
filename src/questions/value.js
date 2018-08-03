@@ -1,10 +1,8 @@
 'use strict';
 
-module.exports = [
-    {
-        type: 'input',
-        name: 'name',
-        message: 'What is the name of your value?',
-        validate: require('./validators/required')
-    }
-];
+const inquirer = require('inquirer');
+const valueQuestions = require('./templates/value');
+
+module.exports = async function () {
+    return await inquirer.prompt(valueQuestions);
+};

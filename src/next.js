@@ -1,6 +1,5 @@
 'use strict';
 
-const moment = require('moment');
 const colors = require('colors');
 
 const eventPublisher = require('./utils/event_publisher');
@@ -10,8 +9,7 @@ console.log('\nLet\'s do something new!\n'.green);
 const nextQuestionaire = require('./questions/next');
 const responsibilityQuestionaire = require('./questions/responsibility');
 const taskQuestionaire = require('./questions/task');
-
-const valueQuestions = require('./questions/value');
+const valueQuestionaire = require('./questions/value');
 
 (async function () {
     const answers = await nextQuestionaire();
@@ -29,7 +27,7 @@ const valueQuestions = require('./questions/value');
             eventPublisher('task_events', 'CREATE_TASK', taskAnswers);
         }
     } else if (answers.type === 'Value') {
-        const valueAnswers = await inquirer.prompt(valueQuestions);
+        const valueAnswers = await valueQuestionaire();
         
         eventPublisher('value_events', 'CREATE_VALUE', valueAnswers);
     }
