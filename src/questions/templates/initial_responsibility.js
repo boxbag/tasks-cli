@@ -5,7 +5,7 @@ module.exports = [
         type: 'input',
         name: 'name',
         message: 'What is the name of your responsibility?',
-        validate: require('./validators/required')
+        validate: require('../validators/required')
     },
     {
         type: 'confirm',

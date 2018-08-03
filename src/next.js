@@ -19,8 +19,9 @@ inquirer.registerPrompt('datetime', require('inquirer-datepicker-prompt'));
 console.log('\nLet\'s do something new!\n'.green);
 
 const questions = require('./questions/next')(responsibilities);
-const initialResponsibilityQuestions = require('./questions/initial_responsibility');
-const responsibilityQuestions = require('./questions/responsibility');
+
+const responsibilityQuestionaire = require('./questions/responsibility');
+
 const initialTaskQuestions = require('./questions/initial_task')(responsibilities);
 const taskQuestions = require('./questions/task')(values);
 const valueQuestions = require('./questions/value');
@@ -29,15 +30,10 @@ const valueQuestions = require('./questions/value');
     const answers = await inquirer.prompt(questions);
 
     if (answers.type === 'Responsibility') {
-        const initialResponsibilityAnswers = await inquirer.prompt(initialResponsibilityQuestions);
+        const responsibilityAnswers = await responsibilityQuestionaire();
 
-        if (initialResponsibilityAnswers.is_necessary === true) {
-            const responsibilityAnswers = await inquirer.prompt(responsibilityQuestions);
-
-            eventPublisher('responsibility_events', 'CREATE_RESPONSIBILITY', {
-                ...initialResponsibilityAnswers,
-                ...responsibilityAnswers
-            });
+        if (responsibilityAnswers.is_necessary === true) {
+            eventPublisher('responsibility_events', 'CREATE_RESPONSIBILITY', responsibilityAnswers);
         }
     } else if (answers.type === 'Task') {
         const initialTaskAnswers = await inquirer.prompt(initialTaskQuestions);
