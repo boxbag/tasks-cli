@@ -1,25 +1,20 @@
 'use strict';
 
-const inquirer = require('inquirer');
-
 const moment = require('moment');
 const colors = require('colors');
 
 const eventPublisher = require('./utils/event_publisher');
 
-const responsibilities = require('./views/responsibilities')
-
 console.log('\nLet\'s do something new!\n'.green);
 
-const questions = require('./questions/next')(responsibilities);
-
+const nextQuestionaire = require('./questions/next');
 const responsibilityQuestionaire = require('./questions/responsibility');
 const taskQuestionaire = require('./questions/task');
 
 const valueQuestions = require('./questions/value');
 
 (async function () {
-    const answers = await inquirer.prompt(questions);
+    const answers = await nextQuestionaire();
 
     if (answers.type === 'Responsibility') {
         const responsibilityAnswers = await responsibilityQuestionaire();

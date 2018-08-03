@@ -1,20 +1,10 @@
 'use strict';
 
-module.exports = (responsibilities) => {
-    let choices;
+const inquirer = require('inquirer');
 
-    if (responsibilities.length === 0) {
-        choices = ['Responsibility'];
-    } else {
-        choices = ['Task', 'Value', 'Responsibility'];
-    }
+const responsibilities = require('../views/responsibilities');
+const questions = require('./templates/next')(responsibilities);
 
-    return [
-        {
-            type: 'list',
-            name: 'type',
-            message: 'What are you adding',
-            choices: choices
-        }
-    ];
+module.exports = async function () {
+    return await inquirer.prompt(questions);
 };
