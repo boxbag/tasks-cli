@@ -2,13 +2,11 @@
 
 const inquirer = require('inquirer');
 
-const fs = require('fs');
-const uuidv4 = require('uuid/v4');
-const path = require('path');
 const moment = require('moment');
 const colors = require('colors');
 
-const taskEvents = require('../data/task_events.json');
+const eventPublisher = require('./utils/event_publisher');
+
 const responsibilityEvents = require('../data/responsibility_events.json');
 const valueEvents = require('../data/value_events.json');
 
@@ -36,17 +34,10 @@ const valueQuestions = require('./questions/value');
         if (initialResponsibilityAnswers.is_necessary === true) {
             const responsibilityAnswers = await inquirer.prompt(responsibilityQuestions);
 
-            responsibilityEvents.push({
-                id: uuidv4(),
-                name: 'CREATE_RESPONSIBILITY',
-                created: moment().toDate().toISOString(),
-                data: {
-                    ...initialResponsibilityAnswers,
-                    ...responsibilityAnswers
-                }
+            eventPublisher('responsibility_events', 'CREATE_RESPONSIBILITY', {
+                ...initialResponsibilityAnswers,
+                ...responsibilityAnswers
             });
-
-            fs.writeFileSync(path.join(__dirname, '../data/responsibility_events.json'), JSON.stringify(responsibilityEvents, null, 4));
         }
     } else if (answers.type === 'Task') {
         const initialTaskAnswers = await inquirer.prompt(initialTaskQuestions);
@@ -54,28 +45,14 @@ const valueQuestions = require('./questions/value');
         if (initialTaskAnswers.is_necessary === true) {
             const taskAnswers = await inquirer.prompt(taskQuestions);
 
-            taskEvents.push({
-                id: uuidv4(),
-                name: 'CREATE_TASK',
-                created: moment().toDate().toISOString(),
-                data: {
-                    ...initialTaskAnswers,
-                    ...taskAnswers
-                }
+            eventPublisher('task_events', 'CREATE_TASK', {
+                ...initialTaskAnswers,
+                ...taskAnswers
             });
-
-            fs.writeFileSync(path.join(__dirname, '../data/task_events.json'), JSON.stringify(taskEvents, null, 4));
         }
     } else if (answers.type === 'Value') {
         const valueAnswers = await inquirer.prompt(valueQuestions);
         
-        valueEvents.push({
-            id: uuidv4(),
-            name: 'CREATE_VALUE',
-            created: moment().toDate().toISOString(),
-            data: valueAnswers
-        });
-
-        fs.writeFileSync(path.join(__dirname, '../data/value_events.json'), JSON.stringify(valueEvents, null, 4));
+        eventPublisher('value_events', 'CREATE_VALUE', valueAnswers);
     }
 })();

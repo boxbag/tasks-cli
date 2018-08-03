@@ -2,17 +2,15 @@
 
 const _ = require('underscore');
 const inquirer = require('inquirer');
-const uuidv4 = require('uuid/v4');
 const moment = require('moment');
-const path = require('path');
 const colors = require('colors');
 
-const fs = require('fs');
+const eventPublisher = require('./utils/event_publisher');
+
 const responsibilities = require('./views/responsibilities');
 const valueEvents = require('../data/value_events.json');
 const values = valueEvents.reduce(require('./reducers/value'), []);
 
-const taskEvents = require('../data/task_events');
 const scoredTasks = require('./views/scored_tasks')
 const inProgressTasks = require('./views/pending_tasks')(moment().toDate());
 
@@ -62,14 +60,9 @@ console.log('');
     const answers = await inquirer.prompt(todoQuestions);
     
     if (answers.action === 'Complete') {
-        taskEvents.push({
-            id: uuidv4(),
-            created: moment().toDate().toISOString(),
-            name: 'COMPLETE_TASK',
-            data: {
-                ...answers,
-                chosen_todo_item: updatedTasks[0].value
-            }
+        eventPublisher('task_events', 'COMPLETE_TASK', {
+            ...answers,
+            chosen_todo_item: updatedTasks[0].value
         });
 
         if (answers.should_follow_up) {
@@ -78,49 +71,27 @@ console.log('');
             if (initialTaskAnswers.is_necessary === true) {
                 const taskAnswers = await inquirer.prompt(taskQuestions);
 
-                taskEvents.push({
-                    id: uuidv4(),
-                    name: 'CREATE_TASK',
-                    created: moment().toDate().toISOString(),
-                    data: {
-                        ...initialTaskAnswers,
-                        ...taskAnswers,
-                        last_task_id: updatedTasks[0].value
-                    }
+                eventPublisher('task_events', 'CREATE_TASK', {
+                    ...initialTaskAnswers,
+                    ...taskAnswers,
+                    last_task_id: updatedTasks[0].value
                 });
             }
         }
     } else if (answers.action === 'Punt') {
-        taskEvents.push({
-            id: uuidv4(),
-            created: moment().toDate().toISOString(),
-            name: 'PUNT_TASK',
-            data: {
-                ...answers,
-                chosen_todo_item: updatedTasks[0].value
-            }
+        eventPublisher('task_events', 'PUNT_TASK', {
+            ...answers,
+            chosen_todo_item: updatedTasks[0].value
         });
     } else if (answers.action === 'Cancel') {
-        taskEvents.push({
-            id: uuidv4(),
-            created: moment().toDate().toISOString(),
-            name: 'CANCEL_TASK',
-            data: {
-                ...answers,
-                chosen_todo_item: updatedTasks[0].value
-            }
+        eventPublisher('task_events', 'CANCEL_TASK', {
+            ...answers,
+            chosen_todo_item: updatedTasks[0].value
         });
     } else if (answers.action === 'Increment') {
-        taskEvents.push({
-            id: uuidv4(),
-            created: moment().toDate().toISOString(),
-            name: 'INCREMENT_TASK',
-            data: {
-                ...answers,
-                chosen_todo_item: updatedTasks[0].value
-            }
+        eventPublisher('task_events', 'INCREMENT_TASK', {
+            ...answers,
+            chosen_todo_item: updatedTasks[0].value
         });
     }
-    
-    fs.writeFileSync(path.join(__dirname, '../data/task_events.json'), JSON.stringify(taskEvents, null, 4));
 })();
