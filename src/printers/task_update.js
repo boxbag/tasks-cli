@@ -13,8 +13,8 @@ module.exports = task => {
     }
 
     if (task.can_automate) {
-        console.log(`Automation Task: ${colors.cyan(task.automation_task)}`);
+        console.log(`Automation Task: ${colors.cyan(task.automation_task)}\n`);
     } else {
-        console.log(`Automation Task: ${colors.cyan('Consider automating a portion of this task')}`);
+        console.log(`Automation Task: ${colors.cyan('Consider automating a portion of this task')}\n`);
     }
 };

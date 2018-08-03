@@ -33,8 +33,6 @@ if (inProgressTasks.length === 0) {
 
 taskUpdatePrinter(updatedTasks[0]);
 
-console.log('');
-
 (async function () {
     const answers = await updateTodoQuestionaire();
     
