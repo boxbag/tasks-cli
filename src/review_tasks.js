@@ -6,15 +6,9 @@ const moment = require('moment');
 
 const eventPublisher = require('./utils/event_publisher');
 
-const responsibilityEvents = require('../data/responsibility_events.json');
-const valueEvents = require('../data/value_events.json');
 const scoredTasks = require('./views/scored_tasks');
 
-const responsibilities = responsibilityEvents.reduce(require('./reducers/responsibility'), []);
-const values = valueEvents.reduce(require('./reducers/value'), []);
-
-const initialTaskQuestions = require('./questions/initial_task')(responsibilities);
-const taskQuestions = require('./questions/task')(values);
+const taskQuestionaire = require('./questions/task');
 
 inquirer.registerPrompt('datetime', require('inquirer-datepicker-prompt'));
 inquirer.registerPrompt('autocomplete', require('inquirer-autocomplete-prompt'));
@@ -46,13 +40,10 @@ const sortedCompletedTasks = _.sortBy(
         }
 
         if (answers.should_followup) {
-            const initialTaskAnswers = await inquirer.prompt(initialTaskQuestions);
+            const taskAnswers = await taskQuestionaire();
 
-            if (initialTaskAnswers.is_necessary === true) {
-                const taskAnswers = await inquirer.prompt(taskQuestions);
-
+            if (taskAnswers.is_necessary === true) {
                 eventPublisher('task_events', 'CREATE_TASK', {
-                    ...initialTaskAnswers,
                     ...taskAnswers,
                     last_task_id: completedTask.id
                 });

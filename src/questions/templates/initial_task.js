@@ -1,6 +1,6 @@
 'use strict';
 
-var fuzzy = require('fuzzy');
+const fuzzy = require('fuzzy');
 
 module.exports = function (responsibilities) {
     return [
@@ -27,7 +27,7 @@ module.exports = function (responsibilities) {
             type: 'input',
             name: 'name',
             message: 'What is the name of your task?',
-            validate: require('./validators/required')
+            validate: require('../validators/required')
         },
         {
             type: 'confirm',

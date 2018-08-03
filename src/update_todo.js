@@ -7,10 +7,6 @@ const colors = require('colors');
 
 const eventPublisher = require('./utils/event_publisher');
 
-const responsibilities = require('./views/responsibilities');
-const valueEvents = require('../data/value_events.json');
-const values = valueEvents.reduce(require('./reducers/value'), []);
-
 const scoredTasks = require('./views/scored_tasks')
 const inProgressTasks = require('./views/pending_tasks')(moment().toDate());
 
@@ -32,8 +28,8 @@ const updatedTasks = inProgressTasks.sort(
 });
 
 const todoQuestions = require('./questions/update_todo');
-const initialTaskQuestions = require('./questions/initial_task')(responsibilities);
-const taskQuestions = require('./questions/task')(values);
+
+const taskQuestionaire = require('./questions/task');
 
 if (inProgressTasks.length === 0) {
     return console.log('\nYou\'re all done for today! Go enjoy your life or add more tasks\n'.green);
@@ -66,13 +62,10 @@ console.log('');
         });
 
         if (answers.should_follow_up) {
-            const initialTaskAnswers = await inquirer.prompt(initialTaskQuestions);
+            const taskAnswers = await taskQuestionaire();
 
-            if (initialTaskAnswers.is_necessary === true) {
-                const taskAnswers = await inquirer.prompt(taskQuestions);
-
+            if (taskAnswers.is_necessary === true) {
                 eventPublisher('task_events', 'CREATE_TASK', {
-                    ...initialTaskAnswers,
                     ...taskAnswers,
                     last_task_id: updatedTasks[0].value
                 });
