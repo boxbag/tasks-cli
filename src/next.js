@@ -1,17 +1,17 @@
 'use strict';
 
-const colors = require('colors');
-
 const eventPublisher = require('./utils/event_publisher');
-
-console.log('\nLet\'s do something new!\n'.green);
 
 const nextQuestionaire = require('./questions/next');
 const responsibilityQuestionaire = require('./questions/responsibility');
 const taskQuestionaire = require('./questions/task');
 const valueQuestionaire = require('./questions/value');
 
+const newTaskPrinter = require('./printers/new_task');
+
 (async function () {
+    newTaskPrinter();
+
     const answers = await nextQuestionaire();
 
     if (answers.type === 'Responsibility') {
