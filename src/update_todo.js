@@ -1,7 +1,6 @@
 'use strict';
 
 const _ = require('underscore');
-const inquirer = require('inquirer');
 const moment = require('moment');
 const colors = require('colors');
 
@@ -23,8 +22,7 @@ const updatedTasks = inProgressTasks.sort(
     };
 });
 
-const todoQuestions = require('./questions/update_todo');
-
+const updateTodoQuestionaire = require('./questions/update_todo');
 const taskQuestionaire = require('./questions/task');
 
 if (inProgressTasks.length === 0) {
@@ -49,7 +47,7 @@ if (updatedTasks[0].can_automate) {
 console.log('');
 
 (async function () {
-    const answers = await inquirer.prompt(todoQuestions);
+    const answers = await updateTodoQuestionaire();
     
     if (answers.action === 'Complete') {
         eventPublisher('task_events', 'COMPLETE_TASK', {
