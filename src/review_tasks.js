@@ -1,17 +1,14 @@
 'use strict';
 
 const _ = require('underscore');
-const inquirer = require('inquirer');
 const moment = require('moment');
 
 const eventPublisher = require('./utils/event_publisher');
 
 const scoredTasks = require('./views/scored_tasks');
 
+const taskReviewQuestionaire = require('./questions/task_review');
 const taskQuestionaire = require('./questions/task');
-
-inquirer.registerPrompt('datetime', require('inquirer-datepicker-prompt'));
-inquirer.registerPrompt('autocomplete', require('inquirer-autocomplete-prompt'));
 
 const completedTasks = scoredTasks
     .filter(t => t.status === 'COMPLETED')
@@ -24,9 +21,11 @@ const sortedCompletedTasks = _.sortBy(
 
 (async function () {
     for (let completedTask of sortedCompletedTasks) {
-        let question = require('./questions/task_review')(completedTask);
-
-        let answers = await inquirer.prompt(question);
+        console.log(`\n${colors.yellow(moment(task.completed_date).format('ddd YYYY-MM-DD'))} ${colors.green(task.name)}\n`);
+        console.log(`You did: ${colors.cyan(task.complete_action)}`);
+        console.log(`You felt: ${colors.cyan(task.complete_feeling)}\n`);
+        
+        let answers = await taskReviewQuestionaire(completedTask);
 
         if (answers.is_ready) {
             eventPublisher('task_events', 'REVIEW_TASK', {

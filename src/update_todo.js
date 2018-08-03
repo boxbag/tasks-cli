@@ -7,11 +7,7 @@ const colors = require('colors');
 
 const eventPublisher = require('./utils/event_publisher');
 
-const scoredTasks = require('./views/scored_tasks')
 const inProgressTasks = require('./views/pending_tasks')(moment().toDate());
-
-inquirer.registerPrompt('datetime', require('inquirer-datepicker-prompt'));
-inquirer.registerPrompt('autocomplete', require('inquirer-autocomplete-prompt'));
 
 const updatedTasks = inProgressTasks.sort(
     (a, b) => { return (b.increment_count * -10000 + b.score) - (a.increment_count * -10000 + a.score); }
