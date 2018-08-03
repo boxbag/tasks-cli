@@ -6,6 +6,8 @@ const colors = require('colors');
 
 const eventPublisher = require('./utils/event_publisher');
 
+const taskUpdatePrinter = require('./printers/task_update');
+
 const inProgressTasks = require('./views/pending_tasks')(moment().toDate());
 
 const updatedTasks = inProgressTasks.sort(
@@ -29,20 +31,7 @@ if (inProgressTasks.length === 0) {
     return console.log('\nYou\'re all done for today! Go enjoy your life or add more tasks\n'.green);
 }
 
-console.log(`\n${colors.green(updatedTasks[0].name)}\n`);
-console.log(`${colors.yellow(updatedTasks[0].necessary_reason)}\n`);
-
-if (updatedTasks[0].can_delegate) {
-    console.log(`Delegate: ${colors.cyan(updatedTasks[0].delegate)}`);
-} else {
-    console.log(`Delegate: ${colors.cyan('Consider pairing up on this task')}`);
-}
-
-if (updatedTasks[0].can_automate) {
-    console.log(`Automation Task: ${colors.cyan(updatedTasks[0].automation_task)}`);
-} else {
-    console.log(`Automation Task: ${colors.cyan('Consider automating a portion of this task')}`);
-}
+taskUpdatePrinter(updatedTasks[0]);
 
 console.log('');
 
