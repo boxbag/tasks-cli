@@ -45,12 +45,10 @@ taskUpdatePrinter(updatedTasks[0]);
         if (answers.should_follow_up) {
             const taskAnswers = await taskQuestionaire();
 
-            if (taskAnswers.is_necessary === true) {
-                eventPublisher('task_events', 'CREATE_TASK', {
-                    ...taskAnswers,
-                    last_task_id: updatedTasks[0].value
-                });
-            }
+            eventPublisher('task_events', 'CREATE_TASK', {
+                ...taskAnswers,
+                last_task_id: updatedTasks[0].value
+            });
         }
     } else if (answers.action === 'Punt') {
         eventPublisher('task_events', 'PUNT_TASK', {

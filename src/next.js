@@ -17,15 +17,11 @@ const newTaskPrinter = require('./printers/new_task');
     if (answers.type === 'Responsibility') {
         const responsibilityAnswers = await responsibilityQuestionaire();
 
-        if (responsibilityAnswers.is_necessary === true) {
-            eventPublisher('responsibility_events', 'CREATE_RESPONSIBILITY', responsibilityAnswers);
-        }
+        eventPublisher('responsibility_events', 'CREATE_RESPONSIBILITY', responsibilityAnswers);
     } else if (answers.type === 'Task') {
         const taskAnswers = await taskQuestionaire();
 
-        if (taskAnswers.is_necessary === true) {
-            eventPublisher('task_events', 'CREATE_TASK', taskAnswers);
-        }
+        eventPublisher('task_events', 'CREATE_TASK', taskAnswers);
     } else if (answers.type === 'Value') {
         const valueAnswers = await valueQuestionaire();
         

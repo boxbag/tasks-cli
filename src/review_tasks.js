@@ -41,12 +41,10 @@ const sortedCompletedTasks = _.sortBy(
         if (answers.should_followup) {
             const taskAnswers = await taskQuestionaire();
 
-            if (taskAnswers.is_necessary === true) {
-                eventPublisher('task_events', 'CREATE_TASK', {
-                    ...taskAnswers,
-                    last_task_id: completedTask.id
-                });
-            }
+            eventPublisher('task_events', 'CREATE_TASK', {
+                ...taskAnswers,
+                last_task_id: completedTask.id
+            });
         }
     }
 })();
