@@ -15,6 +15,10 @@ const updatedTask = inProgressTasks.sort(
 )[0];
 
 const updateTodoQuestionaire = require('./questions/update_todo');
+const completeTaskQuestionaire = require('./questions/complete_task');
+const puntTaskQuestionaire = require('./questions/punt_task');
+const cancelTaskQuestionaire = require('./questions/cancel_task');
+const incrementTaskQuestionaire = require('./questions/increment_task');
 const taskQuestionaire = require('./questions/task');
 
 if (inProgressTasks.length === 0) {
@@ -27,12 +31,14 @@ taskUpdatePrinter(updatedTask);
     const answers = await updateTodoQuestionaire();
     
     if (answers.action === 'Complete') {
+        const completeTaskAnswers = await completeTaskQuestionaire();
+
         eventPublisher('task_events', 'COMPLETE_TASK', {
-            ...answers,
+            ...completeTaskAnswers,
             chosen_todo_item: updatedTask.id
         });
 
-        if (answers.should_follow_up) {
+        if (completeTaskAnswers.should_follow_up) {
             const taskAnswers = await taskQuestionaire();
 
             eventPublisher('task_events', 'CREATE_TASK', {
@@ -41,18 +47,24 @@ taskUpdatePrinter(updatedTask);
             });
         }
     } else if (answers.action === 'Punt') {
+        const puntTaskAnswers = await puntTaskQuestionaire();
+
         eventPublisher('task_events', 'PUNT_TASK', {
-            ...answers,
+            ...puntTaskAnswers,
             chosen_todo_item: updatedTask.id
         });
     } else if (answers.action === 'Cancel') {
+        const cancelTaskAnswers = await cancelTaskQuestionaire();
+
         eventPublisher('task_events', 'CANCEL_TASK', {
-            ...answers,
+            ...cancelTaskAnswers,
             chosen_todo_item: updatedTask.id
         });
     } else if (answers.action === 'Increment') {
+        const incrementTaskAnswers = await incrementTaskQuestionaire();
+
         eventPublisher('task_events', 'INCREMENT_TASK', {
-            ...answers,
+            ...incrementTaskAnswers,
             chosen_todo_item: updatedTask.id
         });
     }
