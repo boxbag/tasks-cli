@@ -37,6 +37,7 @@ node_modules/
 jspm_packages/
 data/
 output/*.html
+config/user.json
 
 # TypeScript v1 declaration files
 typings/

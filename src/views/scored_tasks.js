@@ -5,7 +5,7 @@ const _ = require('underscore');
 const tasks = require('./tasks');
 const responsibilities = require('./responsibilities');
 
-const config = require('../../config.json');
+const config = require('../../config');
 
 const scoredTasks = tasks.map(t => {
     let responsibility = responsibilities.filter(r => r.id === t.responsibility)[0];

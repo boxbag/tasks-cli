@@ -3,7 +3,7 @@
 const moment = require('moment');
 const colors = require('colors');
 
-const config = require('../config.json');
+const config = require('../config');
 
 for (let i = config.task_plan_days - 1; i >= 0; i--) {
     let date = moment().add(i, 'day');

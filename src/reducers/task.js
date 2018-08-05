@@ -4,7 +4,7 @@ const _ = require('underscore');
 const uuidv4 = require('uuid/v4');
 const moment = require('moment');
 
-const config = require('../../config.json');
+const config = require('../../config');
 
 function calculateShouldRecur (t, tasks, now) {
     var shouldRecur;
