@@ -8,9 +8,7 @@ module.exports = function (values) {
             type: 'checkbox',
             name: 'aligned_values',
             message: 'Which values are this task aligned with?',
-            when: function (answers) {
-                return values.length > 0;
-            },
+            when: () => values.length > 0,
             choices: values
         },
         {
