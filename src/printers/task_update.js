@@ -3,7 +3,7 @@
 const colors = require('colors');
 
 module.exports = task => {
-    console.log(`\n${colors.green(task.name)}\n`);
+    console.log(`\n${colors.green(`${task.score} [${task.responsibility_name}] ${task.name}`)}\n`);
     console.log(`${colors.yellow(task.necessary_reason)}\n`);
 
     if (task.can_delegate) {
