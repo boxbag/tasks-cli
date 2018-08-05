@@ -7,15 +7,11 @@ const path = require('path');
 const opn = require('opn');
 
 const recentFinishedTasks = _.sortBy(
-    require('./views/recent_finished_tasks').map(t => {
-        t.completed_date = moment(t.completed_date).startOf('day').toDate();
-
-        return t;
-    }),
+    require('./views/recent_finished_tasks'),
     t => t.completed_date
 ).map(t => {
     return {
-        completed_date: t.completed_date,
+        completed_date: t.complete_date_start_of_day,
         score: t.score,
         name: t.name,
         responsibility_name: t.responsibility_name,

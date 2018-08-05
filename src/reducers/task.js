@@ -79,6 +79,7 @@ module.exports = (tasks, event) => {
                 t.status = 'COMPLETED';
                 t.updated = event.created;
                 t.completed_date = event.created;
+                t.complete_date_start_of_day = moment(event.created).startOf('day').toDate();
                 t.review_date = moment(event.created).startOf('day').add(config.task_review_offset_days, 'days').toDate().toISOString();
                 t.complete_action = event.data.complete_action;
                 t.complete_feeling = event.data.task_feeling;
