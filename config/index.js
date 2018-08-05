@@ -1,7 +1,7 @@
 'use strict';
 
 const _ = require('underscore');
-const defaultConfig = require('./config.json');
+const defaultConfig = require('./default.json');
 
 let userConfig;
 
