@@ -5,7 +5,7 @@ const moment = require('moment');
 
 const eventPublisher = require('./utils/event_publisher');
 
-const scoredTasks = require('./views/scored_tasks');
+const completedTasks = require('./views/completed_tasks');
 
 const taskReviewReadyQuestionaire = require('./questions/task_review_ready');
 const taskReviewQuestionaire = require('./questions/task_review');
@@ -14,7 +14,6 @@ const taskQuestionaire = require('./questions/task');
 const taskReviewPrinter = require('./printers/task_review');
 
 const completedTasks = scoredTasks
-    .filter(t => t.status === 'COMPLETED')
     .filter(t => moment(t.review_date).startOf('day').toDate() <= moment().startOf('day').toDate());
 
 const sortedCompletedTasks = _.sortBy(
