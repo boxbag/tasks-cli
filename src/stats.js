@@ -19,40 +19,7 @@ const recentFinishedTasks = _.sortBy(
     })
 );
 
-const delegatedTasksByDay = recentFinishedTasks.reduce((memo, task) => {
-    memo[task.completed_date] = memo[task.completed_date] || {
-        did_delegate: 0,
-        did_not_delegate: 0
-    };
-
-    if (task.can_delegate) {
-        memo[task.completed_date].did_delegate += 1;
-    } else {
-        memo[task.completed_date].did_not_delegate += 1;
-    }
-
-    return memo;
-}, {});
-
-const delegatedTasksByDayList = [];
-
-for (let property in delegatedTasksByDay) {
-    if (delegatedTasksByDay.hasOwnProperty(property)) {
-        delegatedTasksByDayList.push({
-            completed_date: property,
-            type: 'did_delegate',
-            count: delegatedTasksByDay[property].did_delegate
-        });
-
-        delegatedTasksByDayList.push({
-            completed_date: property,
-            type: 'did_not_delegate',
-            count: delegatedTasksByDay[property].did_not_delegate
-        });
-    }
-}
-
-const html = require('./templates/stats')(recentFinishedTasks, delegatedTasksByDayList);
+const html = require('./templates/stats')(recentFinishedTasks);
 
 const fs = require('fs');
 
