@@ -17,27 +17,21 @@ module.exports = [
         name: 'delegate',
         message: 'Who do we delegate this to?',
         validate: require('../validators/required'),
-        when: function (answers) {
-            return answers.can_delegate === true;
-        }
+        when: answers => answers.can_delegate === true
     },
     {
         type: 'input',
         name: 'reason_cannot_delegate',
         message: 'Why can\'t you delegate this right now?',
         validate: require('../validators/required'),
-        when: function (answers) {
-            return answers.can_delegate === false;
-        }
+        when: answers => answers.can_delegate === false
     },
     {
         type: 'input',
         name: 'eventual_delegate',
         message: 'Who are you going to train to take this over eventually?',
         validate: require('../validators/required'),
-        when: function (answers) {
-            return answers.can_delegate === false;
-        }
+        when: answers => answers.can_delegate === false
     },
     {
         type: 'input',
