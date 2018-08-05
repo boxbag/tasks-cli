@@ -4,6 +4,8 @@ const _ = require('underscore');
 const uuidv4 = require('uuid/v4');
 const moment = require('moment');
 
+const config = require('../../config.json');
+
 function calculateShouldRecur (t, tasks, now) {
     var shouldRecur;
     now = moment(now).startOf('day');
@@ -77,7 +79,7 @@ module.exports = (tasks, event) => {
                 t.status = 'COMPLETED';
                 t.updated = event.created;
                 t.completed_date = event.created;
-                t.review_date = moment(event.created).startOf('day').add(14, 'days').toDate().toISOString();
+                t.review_date = moment(event.created).startOf('day').add(config.task_review_offset_days, 'days').toDate().toISOString();
                 t.complete_action = event.data.complete_action;
                 t.complete_feeling = event.data.task_feeling;
                 t.actual_duration = event.data.actual_duration;
