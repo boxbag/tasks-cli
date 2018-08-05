@@ -7,6 +7,7 @@ const eventPublisher = require('./utils/event_publisher');
 
 const scoredTasks = require('./views/scored_tasks');
 
+const taskReviewReadyQuestionaire = require('./questions/task_review_ready');
 const taskReviewQuestionaire = require('./questions/task_review');
 const taskQuestionaire = require('./questions/task');
 
@@ -25,15 +26,17 @@ const sortedCompletedTasks = _.sortBy(
     for (let completedTask of sortedCompletedTasks) {
         taskReviewPrinter(completedTask);
         
-        let answers = await taskReviewQuestionaire(completedTask);
+        let answers = await taskReviewReadyQuestionaire();
 
-        if (answers.is_ready) {
-            eventPublisher('task_events', 'REVIEW_TASK', {
-                ...answers,
+        if (answers.is_ready === false) {
+            eventPublisher('task_events', 'DELAY_REVIEW_TASK', {
                 task_id: completedTask.id
             });
         } else {
-            eventPublisher('task_events', 'DELAY_REVIEW_TASK', {
+            let taskReviewAnswers = await taskReviewQuestionaire(completedTask);
+
+            eventPublisher('task_events', 'REVIEW_TASK', {
+                ...taskReviewAnswers,
                 task_id: completedTask.id
             });
         }
