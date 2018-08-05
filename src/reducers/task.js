@@ -67,7 +67,7 @@ module.exports = (tasks, event) => {
             delegate: event.data.delegate,
             reason_cannot_delegate: event.data.reason_cannot_delegate,
             impact: event.data.impact,
-            estimated_duration: event.data.estimated_duration || 30,
+            estimated_duration: event.data.estimated_duration || config.task_estimated_duration_default_minutes,
             urgency: event.data.urgency,
             original_task_id: event.id,
             increment_count: 0
@@ -135,7 +135,7 @@ module.exports = (tasks, event) => {
         tasks
             .filter(t => t.id === event.data.task_id)
             .forEach(t => {
-                t.review_date = moment(event.created).startOf('day').add(14, 'days').toDate().toISOString();
+                t.review_date = moment(event.created).startOf('day').add(config.task_review_delay_offset_days, 'days').toDate().toISOString();
             });
     } else if (event.name === 'INCREMENT_TASK') {
         tasks
