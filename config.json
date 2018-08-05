@@ -1,5 +1,10 @@
 {
     "task_review_offset_days": 14,
     "task_review_delay_offset_days": 14,
-    "task_estimated_duration_default_minutes": 30
+    "task_estimated_duration_default_minutes": 30,
+
+    "task_score_multiplier_impact": 100,
+    "task_score_multiplier_significance": 10,
+    "task_score_multiplier_urgency": 1,
+    "task_score_multiplier_punt_count": -10
 }
