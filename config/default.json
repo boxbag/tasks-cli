@@ -8,5 +8,7 @@
     "task_score_multiplier_urgency": 1,
     "task_score_multiplier_punt_count": -10,
 
-    "task_plan_days": 3
+    "task_plan_days": 3,
+
+    "recent_finished_task_days": 14
 }
