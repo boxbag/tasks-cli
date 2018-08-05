@@ -9,16 +9,15 @@ const opn = require('opn');
 const recentFinishedTasks = _.sortBy(
     require('./views/recent_finished_tasks'),
     t => t.completed_date
-).map(t => {
-    return {
+).map(t => ({
         completed_date: t.complete_date_start_of_day,
         score: t.score,
         name: t.name,
         responsibility_name: t.responsibility_name,
         actual_duration: t.actual_duration / 60,
         can_delegate: t.can_delegate
-    };
-});
+    })
+);
 
 const delegatedTasksByDay = recentFinishedTasks.reduce((memo, task) => {
     memo[task.completed_date] = memo[task.completed_date] || {
