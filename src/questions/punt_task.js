@@ -2,8 +2,8 @@
 
 const inquirer = require('inquirer');
 
-const puntTaskQuestions = require('./templates/punt_task');
+module.exports = async function (task) {
+    const puntTaskQuestions = require('./templates/punt_task')(task);
 
-module.exports = async function () {
     return await inquirer.prompt(puntTaskQuestions);
 };

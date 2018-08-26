@@ -10,5 +10,7 @@
 
     "task_plan_days": 3,
 
-    "recent_finished_task_days": 14
+    "recent_finished_task_days": 14,
+
+    "cancel_punt_count": 3
 }

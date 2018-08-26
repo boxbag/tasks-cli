@@ -47,7 +47,7 @@ taskUpdatePrinter(updatedTask);
             });
         }
     } else if (answers.action === 'Punt') {
-        const puntTaskAnswers = await puntTaskQuestionaire();
+        const puntTaskAnswers = await puntTaskQuestionaire(updatedTask);
 
         eventPublisher('task_events', 'PUNT_TASK', {
             ...puntTaskAnswers,
