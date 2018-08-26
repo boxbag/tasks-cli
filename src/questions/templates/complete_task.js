@@ -25,18 +25,6 @@ module.exports = [
     },
     {
         type: 'confirm',
-        name: 'is_documented',
-        message: 'Did you document the results of this task?'
-    },
-    {
-        type: 'input',
-        name: 'documentation_link',
-        message: 'What is the link to this documentation?',
-        when: answers => answers.is_documented,
-        validate: require('../validators/required')
-    },
-    {
-        type: 'confirm',
         name: 'should_follow_up',
         message: 'Do you need to follow up and do something else after this?'
     }
