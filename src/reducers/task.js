@@ -96,6 +96,8 @@ module.exports = (tasks, event) => {
                     clonedTask.created = event.created;
                     clonedTask.original_task_id = t.original_task_id;
                     clonedTask.increment_count = 0;
+                    clonedTask.punt_count = 0;
+                    clonedTask.should_cancel_on_next_punt = false;
 
                     tasks.push(clonedTask);
                 }
