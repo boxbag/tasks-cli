@@ -15,7 +15,7 @@ module.exports = task => {
             name: 'punt_reason',
             message: 'What is the reason you\'re punting this task?',
             validate: require('../validators/required'),
-            when: answers => task.should_cancel_on_next_punt === false
+            when: answers => task.should_cancel_on_next_punt !== true
         },
         {
             type: 'datetime',
@@ -23,7 +23,7 @@ module.exports = task => {
             message: 'What is the new start date you want to punt to?',
             format: ['dddd', ' ', 'mm', '/', 'dd', '/', 'yyyy'],
             initial: moment().add(1, 'day').toDate(),
-            when: answers => task.should_cancel_on_next_punt === false
+            when: answers => task.should_cancel_on_next_punt !== true
         }
     ];
 };
