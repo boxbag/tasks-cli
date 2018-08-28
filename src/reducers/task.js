@@ -124,6 +124,7 @@ module.exports = (tasks, event) => {
             .filter(t => t.id === event.data.chosen_todo_item)
             .forEach(t => {
                 t.status = 'CANCELLED';
+                t.updated = event.created;
                 t.cancellation_reason = event.data.cancellation_reason
             });
     } else if (event.name === 'REVIEW_TASK') {
