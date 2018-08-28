@@ -2,54 +2,9 @@
 
 const assert = require('assert');
 
-const recurringFixture = require('./fixtures/recurring.json');
+const recurringFixture = require('./fixtures/recurring/input.json');
 const taskReducer = require('../../src/reducers/task');
 
-const result = recurringFixture.reduce(taskReducer, []);
+const results = recurringFixture.reduce(taskReducer, []);
 
-assert.deepStrictEqual(result, [ { id: '47d2d04d-1b4f-4d38-8f2a-7e4874ee975d',
-    created: '2018-05-27T14:02:53.414Z',
-    status: 'COMPLETED',
-    punt_count: 0,
-    punt_reasons: [],
-    responsibility: '46bd654e-d1f8-4cec-9894-56b5e062bc4b',
-    name: 'Attend founders meeting',
-    necessary_reason: 'Because we need to discuss a wide range of issues that face Xendit',
-    start_date: '2018-06-11',
-    recurring_type: 'Weekly',
-    recurring_schedule: '1',
-    stop_recurrence_after: 'never',
-    recurring_days: [ 1 ],
-    can_automate: false,
-    automation_task: undefined,
-    cannot_automation_reason: 'Because we discuss different things every time',
-    can_delegate: false,
-    delegate: undefined,
-    reason_cannot_delegate: 'Because we\'re still the founders',
-    impact: 7,
-    urgency: 7,
-    original_task_id: '47d2d04d-1b4f-4d38-8f2a-7e4874ee975d',
-    updated: '2018-05-29T12:21:39.254Z' },
-  { id: '7575ceb5-9f70-4220-bd57-8bc510584261',
-    created: '2018-05-29T12:21:39.254Z',
-    status: 'PENDING',
-    punt_count: 0,
-    punt_reasons: [],
-    responsibility: '46bd654e-d1f8-4cec-9894-56b5e062bc4b',
-    name: 'Attend founders meeting',
-    necessary_reason: 'Because we need to discuss a wide range of issues that face Xendit',
-    start_date: '2018-06-18',
-    recurring_type: 'Weekly',
-    recurring_schedule: '1',
-    stop_recurrence_after: 'never',
-    recurring_days: [ 1 ],
-    can_automate: false,
-    automation_task: undefined,
-    cannot_automation_reason: 'Because we discuss different things every time',
-    can_delegate: false,
-    delegate: undefined,
-    reason_cannot_delegate: 'Because we\'re still the founders',
-    impact: 7,
-    urgency: 7,
-    original_task_id: '47d2d04d-1b4f-4d38-8f2a-7e4874ee975d',
-    updated: '2018-05-29T12:21:39.254Z' } ]);
+assert.deepStrictEqual(JSON.parse(JSON.stringify(results)), require('./fixtures/recurring/output.json'));

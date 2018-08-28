@@ -11,7 +11,7 @@
             "start_date": "2018-06-11",
             "recurring_type": "Weekly",
             "recurring_schedule": "1",
-            "stop_recurrence_after": "never",
+            "does_stop_recurring": false,
             "recurring_days": [
                 1
             ],
@@ -23,14 +23,6 @@
             "explain_impact": "We can make decisions that get put into effect immediately and be aligned",
             "urgency": 7,
             "explain_urgency": "It's pretty urgent because we have it every week"
-        }
-    },
-    {
-        "id": "4efe1b01-4538-4627-a824-1aacfb98bcd0",
-        "created": "2018-05-29T09:36:56.573Z",
-        "name": "START_TASK",
-        "data": {
-            "task_id": "47d2d04d-1b4f-4d38-8f2a-7e4874ee975d"
         }
     },
     {
