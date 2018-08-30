@@ -1,13 +1,13 @@
 'use strict';
 
 const assert = require('assert');
+const fs = require('fs');
+const path = require('path');
 
 const taskReducer = require('../../src/reducers/task');
 
-const tests = [
-    'cancel_task',
-    'recurring'
-];
+const tests = fs.readdirSync(path.join(__dirname, './fixtures'))
+    .filter(f => f[0] !== '.');
 
 describe('task reducer', () => {
     tests.forEach(test => {
