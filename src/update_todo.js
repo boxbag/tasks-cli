@@ -10,8 +10,10 @@ const taskUpdatePrinter = require('./printers/task_update');
 
 const inProgressTasks = require('./views/pending_tasks')(moment().toDate());
 
+const now = moment().startOf('day').toDate().toISOString();
+
 const updatedTask = inProgressTasks.sort(
-    (a, b) => { return (b.increment_count * -10000 + b.score) - (a.increment_count * -10000 + a.score); }
+    (a, b) => { return ((b.increment_counts[now] || 0) * -10000 + b.score) - ((a.increment_counts[now] || 0) * -10000 + a.score); }
 )[0];
 
 const updateTodoQuestionaire = require('./questions/update_todo');

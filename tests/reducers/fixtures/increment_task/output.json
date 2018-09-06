@@ -2,7 +2,7 @@
     {
         "id": "47d2d04d-1b4f-4d38-8f2a-7e4874ee975d",
         "created": "2018-05-27T14:02:53.414Z",
-        "status": "CANCELLED",
+        "status": "PENDING",
         "punt_count": 0,
         "punt_reasons": [],
         "responsibility": "46bd654e-d1f8-4cec-9894-56b5e062bc4b",
@@ -22,7 +22,9 @@
         "urgency": 7,
         "original_task_id": "47d2d04d-1b4f-4d38-8f2a-7e4874ee975d",
         "increment_count": 0,
-        "increment_counts": {},
+        "increment_counts": {
+            "2018-05-28T17:00:00.000Z": 1
+        },
         "updated": "2018-05-29T12:21:39.254Z"
     }
 ]

@@ -70,7 +70,8 @@ module.exports = (tasks, event) => {
             estimated_duration: event.data.estimated_duration || config.task_estimated_duration_default_minutes,
             urgency: event.data.urgency,
             original_task_id: event.id,
-            increment_count: 0
+            increment_count: 0,
+            increment_counts: {}
         });
     } else if (event.name === 'COMPLETE_TASK') {
         tasks
@@ -151,6 +152,15 @@ module.exports = (tasks, event) => {
         tasks
             .filter(t => t.id === event.data.chosen_todo_item)
             .forEach(t => {
+                t.increment_counts = t.increment_counts || {};
+
+                let key = moment(event.created).startOf('day').toDate().toISOString();
+
+                t.increment_counts[key] = t.increment_counts[key] || 0;
+                t.increment_counts[key] += 1;
+
+                t.updated = event.created;
+
                 if (moment(event.created).startOf('day').toDate().getTime() === moment().startOf('day').toDate().getTime()) {
                     t.increment_count += 1;
                 }
