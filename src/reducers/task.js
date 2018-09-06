@@ -70,7 +70,6 @@ module.exports = (tasks, event) => {
             estimated_duration: event.data.estimated_duration || config.task_estimated_duration_default_minutes,
             urgency: event.data.urgency,
             original_task_id: event.id,
-            increment_count: 0,
             increment_counts: {}
         });
     } else if (event.name === 'COMPLETE_TASK') {
@@ -96,7 +95,6 @@ module.exports = (tasks, event) => {
                     clonedTask.id = event.id;
                     clonedTask.created = event.created;
                     clonedTask.original_task_id = t.original_task_id;
-                    clonedTask.increment_count = 0;
                     clonedTask.punt_count = 0;
                     clonedTask.should_cancel_on_next_punt = false;
 
@@ -117,7 +115,6 @@ module.exports = (tasks, event) => {
                     t.should_cancel_on_next_punt = t.punt_count > config.cancel_punt_count;
                     t.updated = event.created,
                     t.punt_reasons.push(event.data.punt_reason);
-                    t.increment_count = 0;
                 }
             });
     } else if (event.name === 'CANCEL_TASK') {
@@ -160,10 +157,6 @@ module.exports = (tasks, event) => {
                 t.increment_counts[key] += 1;
 
                 t.updated = event.created;
-
-                if (moment(event.created).startOf('day').toDate().getTime() === moment().startOf('day').toDate().getTime()) {
-                    t.increment_count += 1;
-                }
             });
     }
 
