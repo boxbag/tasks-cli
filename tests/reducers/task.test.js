@@ -4,7 +4,9 @@ const assert = require('assert');
 const fs = require('fs');
 const path = require('path');
 
-const taskReducer = require('../../src/reducers/task');
+const config = require('../../config');
+
+const taskReducer = require('../../src/reducers/task')(config);
 
 const tests = fs.readdirSync(path.join(__dirname, './fixtures'))
     .filter(f => f[0] !== '.');
