@@ -105,14 +105,14 @@ module.exports = (tasks, event) => {
         tasks
             .filter(t => t.id === event.data.chosen_todo_item)
             .forEach(t => {
-                if (t.should_cancel_on_next_punt && t.confirm_punt_over_count === true) {
+                if (t.should_cancel_on_next_punt && event.data.confirm_punt_over_count === true) {
                     t.status = 'CANCELLED';
                     t.cancellation_reason = 'OVER_PUNT_COUNT';
                 } else {
                     t.status = 'PENDING';
                     t.start_date = moment(event.data.new_start_date).startOf('day').toDate().toISOString();
                     t.punt_count += 1;
-                    t.should_cancel_on_next_punt = t.punt_count > config.cancel_punt_count;
+                    t.should_cancel_on_next_punt = t.punt_count >= config.cancel_punt_count;
                     t.updated = event.created,
                     t.punt_reasons.push(event.data.punt_reason);
                 }
