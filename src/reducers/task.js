@@ -5,14 +5,14 @@ const uuidv4 = require('uuid/v4');
 const moment = require('moment');
 
 function calculateShouldRecur (t, tasks, now) {
-    var shouldRecur;
+    let shouldRecur;
     now = moment(now).startOf('day');
 
     if (t.recurring_type === 'One time') {
         return false;
     } else if (t.does_stop_recurring === false) {
         if (t.recurring_type === 'Weekly') {
-            var starting = moment(t.start_date).add(1, 'day').startOf('day');
+            let starting = moment(t.start_date).add(1, 'day').startOf('day');
 
             starting.add(Number((t.recurring_schedule) - 1) * 7, 'day');
 
@@ -22,7 +22,7 @@ function calculateShouldRecur (t, tasks, now) {
 
             return starting.format('YYYY-MM-DD');
         } else if (t.recurring_type === 'EOM') {
-            var starting = moment(t.start_date).add(1, 'day').endOf('month');
+            let starting = moment(t.start_date).add(1, 'day').endOf('month');
 
             starting.add(Number(t.recurring_schedule) - 1, 'month');
 
@@ -31,7 +31,7 @@ function calculateShouldRecur (t, tasks, now) {
     } else {
         if (tasks.filter(task => task.original_task_id === t.id).length < Number(t.stop_recurrence_after)) {
             if (t.recurring_type === 'Weekly') {
-                var starting = moment(t.start_date).add(1, 'day').startOf('day');
+                let starting = moment(t.start_date).add(1, 'day').startOf('day');
 
                 starting.add(Number((t.recurring_schedule) - 1) * 7, 'day');
 
@@ -41,7 +41,7 @@ function calculateShouldRecur (t, tasks, now) {
 
                 return starting.format('YYYY-MM-DD');
             } else if (t.recurring_type === 'EOM') {
-                var starting = moment(t.start_date).add(1, 'day').endOf('month');
+                let starting = moment(t.start_date).add(1, 'day').endOf('month');
 
                 starting.add(Number(t.recurring_schedule) - 1, 'month');
 
