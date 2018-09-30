@@ -29,7 +29,7 @@ function calculateShouldRecur (t, tasks, now) {
             return starting.format('YYYY-MM-DD');
         }
     } else {
-        if (tasks.filter(task => task.original_task_id === t.id).length < Number(t.stop_recurrence_after)) {
+        if (t.recurring_count < Number(t.stop_recurrence_after)) {
             if (t.recurring_type === 'Weekly') {
                 let starting = moment(t.start_date).add(1, 'day').startOf('day');
 
@@ -95,6 +95,7 @@ module.exports = (config) => {
                     t.complete_action = event.data.complete_action;
                     t.complete_feeling = event.data.task_feeling;
                     t.actual_duration = event.data.actual_duration;
+                    t.recurring_count = t.recurring_count || 0;
 
                     let recurrence = calculateShouldRecur(t, tasks, event.created);
 
@@ -102,6 +103,7 @@ module.exports = (config) => {
                         let clonedTask = _.clone(t);
 
                         clonedTask.start_date = recurrence;
+                        clonedTask.recurring_count = clonedTask.recurring_count + 1;
                         clonedTask.status = 'PENDING';
                         clonedTask.id = event.id;
                         clonedTask.created = event.created;
