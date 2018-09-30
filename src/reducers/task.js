@@ -21,6 +21,12 @@ function calculateShouldRecur (t, tasks, now) {
             }
 
             return starting.format('YYYY-MM-DD');
+        } else if (t.recurring_type === 'EOM') {
+            var starting = moment(t.start_date).add(1, 'day').endOf('month');
+
+            starting.add(Number(t.recurring_schedule) - 1, 'month');
+
+            return starting.format('YYYY-MM-DD');
         }
     } else {
         if (tasks.filter(task => task.original_task_id === t.id).length < Number(t.stop_recurrence_after)) {
@@ -32,6 +38,12 @@ function calculateShouldRecur (t, tasks, now) {
                 while (!t.recurring_days.includes(starting.day()) || moment.duration(starting.diff(now)).days() < 1) {
                     starting.add(1, 'day');
                 }
+
+                return starting.format('YYYY-MM-DD');
+            } else if (t.recurring_type === 'EOM') {
+                var starting = moment(t.start_date).add(1, 'day').endOf('month');
+
+                starting.add(Number(t.recurring_schedule) - 1, 'month');
 
                 return starting.format('YYYY-MM-DD');
             }
