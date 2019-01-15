@@ -3,7 +3,7 @@
 var program = require('commander');
 
 program
-    .command('add', 'Add a new task or responsibility')
+    .command('add', 'Add a new task')
     .alias('a')
     .command('update', 'Update a task on your todo list')
     .alias('u')
