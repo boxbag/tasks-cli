@@ -91,7 +91,6 @@ module.exports = (config) => {
                     t.updated = event.created;
                     t.completed_date = event.created;
                     t.complete_date_start_of_day = moment(event.created).startOf('day').toDate();
-                    t.review_date = moment(event.created).startOf('day').add(config.task_review_offset_days, 'days').toDate().toISOString();
                     t.complete_action = event.data.complete_action;
                     t.complete_feeling = event.data.task_feeling;
                     t.actual_duration = event.data.actual_duration;
@@ -137,26 +136,6 @@ module.exports = (config) => {
                     t.status = 'CANCELLED';
                     t.updated = event.created;
                     t.cancellation_reason = event.data.cancellation_reason
-                });
-        } else if (event.name === 'REVIEW_TASK') {
-            tasks
-                .filter(t => t.id === event.data.task_id)
-                .forEach(t => {
-                    t.status = 'REVIEWED';
-                    t.updated = event.created;
-                    t.review_completed_date = event.created;
-                    t.review_impact = event.data.review_impact;
-                    t.explain_review_impact = event.data.explain_review_impact,
-                    t.impact_delta = t.review_impact - t.impact;
-                    t.review_urgency = event.data.review_urgency,
-                    t.explain_review_urgency = event.data.explain_review_urgency,
-                    t.urgency_delta = t.review_urgency - t.urgency
-                });
-        } else if (event.name === 'DELAY_REVIEW_TASK') {
-            tasks
-                .filter(t => t.id === event.data.task_id)
-                .forEach(t => {
-                    t.review_date = moment(event.created).startOf('day').add(config.task_review_delay_offset_days, 'days').toDate().toISOString();
                 });
         } else if (event.name === 'INCREMENT_TASK') {
             tasks

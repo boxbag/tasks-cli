@@ -24,8 +24,7 @@
         "increment_counts": {},
         "updated": "2018-05-29T12:21:39.254Z",
         "completed_date": "2018-05-29T12:21:39.254Z",
-        "complete_date_start_of_day": "2018-05-28T17:00:00.000Z",
-        "review_date": "2018-06-11T17:00:00.000Z"
+        "complete_date_start_of_day": "2018-05-28T17:00:00.000Z"
     },
     {
         "id": "7575ceb5-9f70-4220-bd57-8bc510584261",
@@ -53,7 +52,6 @@
         "updated": "2018-05-29T12:21:39.254Z",
         "completed_date": "2018-05-29T12:21:39.254Z",
         "complete_date_start_of_day": "2018-05-28T17:00:00.000Z",
-        "review_date": "2018-06-11T17:00:00.000Z",
         "should_cancel_on_next_punt": false,
         "original_task_id": "47d2d04d-1b4f-4d38-8f2a-7e4874ee975d",
         "estimated_duration": 30

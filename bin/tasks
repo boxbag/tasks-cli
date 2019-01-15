@@ -7,8 +7,6 @@ program
     .alias('a')
     .command('update', 'Update a task on your todo list')
     .alias('u')
-    .command('review', 'Review your tasks impact')
-    .alias('r')
     .command('stats', 'Generate a report of your performance')
     .alias('s')
     .command('plan', 'Generate a plan for the next few days')
