@@ -2,15 +2,8 @@
 
 const fuzzy = require('fuzzy');
 
-module.exports = function (values) {
+module.exports = function () {
     return [
-        {
-            type: 'checkbox',
-            name: 'aligned_values',
-            message: 'Which values are this task aligned with?',
-            when: () => values.length > 0,
-            choices: values
-        },
         {
             type: 'input',
             name: 'necessary_reason',

@@ -5,7 +5,6 @@ const eventPublisher = require('./utils/event_publisher');
 const nextQuestionaire = require('./questions/next');
 const responsibilityQuestionaire = require('./questions/responsibility');
 const taskQuestionaire = require('./questions/task');
-const valueQuestionaire = require('./questions/value');
 
 const newTaskPrinter = require('./printers/new_task');
 
@@ -22,9 +21,5 @@ const newTaskPrinter = require('./printers/new_task');
         const taskAnswers = await taskQuestionaire();
 
         eventPublisher('task_events', 'CREATE_TASK', taskAnswers);
-    } else if (answers.type === 'Value') {
-        const valueAnswers = await valueQuestionaire();
-        
-        eventPublisher('value_events', 'CREATE_VALUE', valueAnswers);
     }
 })();

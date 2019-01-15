@@ -11,6 +11,5 @@ program
     .alias('s')
     .command('plan', 'Generate a plan for the next few days')
     .alias('p')
-    .command('lv', 'Get a list of your values');
 
 program.parse(process.argv);

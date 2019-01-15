@@ -6,7 +6,7 @@ module.exports = (responsibilities) => {
     if (responsibilities.length === 0) {
         choices = ['Responsibility'];
     } else {
-        choices = ['Task', 'Value', 'Responsibility'];
+        choices = ['Task', 'Responsibility'];
     }
 
     return [
