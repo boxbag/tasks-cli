@@ -6,6 +6,7 @@
         "punt_count": 0,
         "punt_reasons": [],
         "responsibility": "46bd654e-d1f8-4cec-9894-56b5e062bc4b",
+        "responsibility_name": "Release escrow product",
         "name": "Attend founders meeting",
         "necessary_reason": "Because we need to discuss a wide range of issues that face Xendit",
         "start_date": "2018-06-10T17:00:00.000Z",

@@ -10,7 +10,6 @@ const config = require('../../config');
 const scoredTasks = tasks.map(t => {
     let responsibility = responsibilities.filter(r => r.id === t.responsibility)[0];
 
-    t.responsibility_name = responsibility.name;
     t.score = t.impact * config.task_score_multiplier_impact + responsibility.significance * config.task_score_multiplier_significance + t.urgency * config.task_score_multiplier_urgency + t.punt_count * config.task_score_multiplier_punt_count;
 
     return t;

@@ -6,6 +6,7 @@
         "punt_count": 1,
         "punt_reasons": ["foobar"],
         "responsibility": "46bd654e-d1f8-4cec-9894-56b5e062bc4b",
+        "responsibility_name": "Release escrow product",
         "should_cancel_on_next_punt": false,
         "name": "Attend founders meeting",
         "necessary_reason": "Because we need to discuss a wide range of issues that face Xendit",
