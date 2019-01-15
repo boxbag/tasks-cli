@@ -2,7 +2,6 @@
 
 const eventPublisher = require('./utils/event_publisher');
 
-const responsibilityQuestionaire = require('./questions/responsibility');
 const taskQuestionaire = require('./questions/task');
 
 const newTaskPrinter = require('./printers/new_task');
