@@ -10,13 +10,6 @@ module.exports = [
         validate: require('../validators/required')
     },
     {
-        type: 'list',
-        name: 'task_feeling',
-        message: 'How did you feel while doing this task?',
-        choices: ['Stressed', 'Neutral', 'In Flow'],
-        default: 'Neutral'
-    },
-    {
         type: 'input',
         name: 'actual_duration',
         message: 'How many minutes did this task take to complete?',

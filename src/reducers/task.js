@@ -88,7 +88,6 @@ module.exports = (config) => {
                     t.completed_date = event.created;
                     t.complete_date_start_of_day = moment(event.created).startOf('day').toDate();
                     t.complete_action = event.data.complete_action;
-                    t.complete_feeling = event.data.task_feeling;
                     t.actual_duration = event.data.actual_duration;
                     t.recurring_count = t.recurring_count || 0;
 
