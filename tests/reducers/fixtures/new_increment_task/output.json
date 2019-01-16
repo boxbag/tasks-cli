@@ -1,0 +1,25 @@
+[
+    {
+        "id": "47d2d04d-1b4f-4d38-8f2a-7e4874ee975d",
+        "created": "2018-05-27T14:02:53.414Z",
+        "status": "PENDING",
+        "punt_count": 0,
+        "punt_reasons": [],
+        "name": "Attend founders meeting",
+        "necessary_reason": "Because we need to discuss a wide range of issues that face Xendit",
+        "start_date": "2018-05-29T17:00:00.000Z",
+        "recurring_type": "Weekly",
+        "recurring_schedule": "1",
+        "does_stop_recurring": false,
+        "recurring_days": [ 1 ],
+        "impact": 7,
+        "urgency": 7,
+        "score": 707,
+        "original_task_id": "47d2d04d-1b4f-4d38-8f2a-7e4874ee975d",
+        "increment_counts": {
+            "2018-05-28T17:00:00.000Z": 1
+        },
+        "updated": "2018-05-29T12:21:39.254Z",
+        "success_metrics": ""
+    }
+]

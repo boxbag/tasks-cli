@@ -145,6 +145,10 @@ module.exports = (config) => {
                     t.increment_counts[key] += 1;
 
                     t.updated = event.created;
+
+                    if (event.data.next_check_date) {
+                        t.start_date = moment(event.data.next_check_date).startOf('day').toDate().toISOString()
+                    }
                 });
         }
 
