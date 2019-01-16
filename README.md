@@ -7,13 +7,18 @@ Prioritizing tasks is essential to realizing the impact that we want to make in 
 There are a few major problems that this tool seeks to address:
 
 1. Prioritization
-2. Cognitive Overload
-3. Guilt
-4. Long Term Optimization (BETA)
+2. Not Working
+3. Cognitive Overload
+4. Guilt
+5. Long Term Optimization (BETA)
 
 ### Prioritization
 
 Without proper prioritization, we default to working on urgent tasks or easy tasks as the brain takes the path of least resistance. Therefore, a tool should take on the majority of the work to present a sorted list based on parameters collected from the user (impact, urgency, etc) and calculate a priority based on configurable linear weights that normalize these parameters.
+
+### Not Working
+
+The space of tasks that we shouldn't work on is infinite because we only have a finite amount of time. Therefore, it is important to know which tasks we should not be working on at all. This is partly solved by prioritization because those tasks tend to fall near the bottom. However, this tool also needs to help the user understand more deeply which tasks they should not be working on and perhaps filter before those tasks even make it onto the user's list.
 
 ### Cognitive Overload
 
