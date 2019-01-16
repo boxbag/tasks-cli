@@ -1,10 +1,10 @@
 'use strict';
 
 const moment = require('moment');
-const scoredTasks = require('./scored_tasks');
+const scoreSortedTasks = require('./score_sorted_tasks');
 
 module.exports = function (date) {
-    return scoredTasks
+    return scoreSortedTasks
         .filter(t => t.status === 'PENDING')
         .filter(t => moment(date).startOf('day').toDate() >= moment(t.start_date).startOf('day').toDate());
 };

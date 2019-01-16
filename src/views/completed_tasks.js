@@ -1,5 +1,5 @@
 'use strict';
 
-const scoredTasks = require('./scored_tasks');
+const scoreSortedTasks = require('./score_sorted_tasks');
 
-module.exports = scoredTasks.filter(t => t.status === 'COMPLETED');
+module.exports = scoreSortedTasks.filter(t => t.status === 'COMPLETED');
