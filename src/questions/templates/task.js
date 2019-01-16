@@ -3,12 +3,6 @@
 module.exports = function () {
     return [
         {
-            type: 'input',
-            name: 'necessary_reason',
-            message: 'Why do you absolutely need this?',
-            validate: require('../validators/required')
-        },
-        {
             type: 'datetime',
             name: 'start_date',
             message: 'What date does this task start?',

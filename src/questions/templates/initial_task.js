@@ -9,6 +9,12 @@ module.exports = function () {
             validate: require('../validators/required')
         },
         {
+            type: 'input',
+            name: 'necessary_reason',
+            message: 'Why do you absolutely need this?',
+            validate: require('../validators/required')
+        },
+        {
             type: 'confirm',
             name: 'is_necessary',
             message: 'Is this task really necessary?',
