@@ -17,7 +17,6 @@
         "can_delegate": false,
         "reason_cannot_delegate": "Because we're still the founders",
         "impact": 7,
-        "estimated_duration": 30,
         "urgency": 7,
         "score": 707,
         "original_task_id": "47d2d04d-1b4f-4d38-8f2a-7e4874ee975d",

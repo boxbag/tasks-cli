@@ -18,7 +18,6 @@
         "reason_cannot_delegate": "Because we're still the founders",
         "recurring_count": 0,
         "impact": 7,
-        "estimated_duration": 30,
         "urgency": 7,
         "score": 707,
         "original_task_id": "47d2d04d-1b4f-4d38-8f2a-7e4874ee975d",
@@ -46,7 +45,6 @@
         "reason_cannot_delegate": "Because we're still the founders",
         "recurring_count": 1,
         "impact": 7,
-        "estimated_duration": 30,
         "urgency": 7,
         "score": 707,
         "original_task_id": "47d2d04d-1b4f-4d38-8f2a-7e4874ee975d",
@@ -55,8 +53,7 @@
         "completed_date": "2018-06-30T12:21:39.254Z",
         "complete_date_start_of_day": "2018-06-29T17:00:00.000Z",
         "should_cancel_on_next_punt": false,
-        "original_task_id": "47d2d04d-1b4f-4d38-8f2a-7e4874ee975d",
-        "estimated_duration": 30
+        "original_task_id": "47d2d04d-1b4f-4d38-8f2a-7e4874ee975d"
     },
     {
         "can_automate": false,
@@ -66,7 +63,6 @@
         "completed_date": "2018-06-30T12:21:39.254Z",
         "created": "2018-06-30T12:21:39.254Z",
         "does_stop_recurring": true,
-        "estimated_duration": 30,
         "id": "7575ceb5-9f70-4220-bd57-8bc510584261",
         "impact": 7,
         "increment_counts": {},

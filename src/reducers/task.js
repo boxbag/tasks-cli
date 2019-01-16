@@ -77,7 +77,6 @@ module.exports = (config) => {
                 delegate: event.data.delegate,
                 reason_cannot_delegate: event.data.reason_cannot_delegate,
                 impact: event.data.impact,
-                estimated_duration: event.data.estimated_duration || config.task_estimated_duration_default_minutes,
                 urgency: event.data.urgency,
                 score: event.data.impact * config.task_score_multiplier_impact + event.data.urgency * config.task_score_multiplier_urgency,
                 original_task_id: event.id,
