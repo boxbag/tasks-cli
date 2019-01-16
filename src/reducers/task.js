@@ -83,7 +83,7 @@ module.exports = (config, responsibilities) => {
                 impact: event.data.impact,
                 estimated_duration: event.data.estimated_duration || config.task_estimated_duration_default_minutes,
                 urgency: event.data.urgency,
-                score: event.data.impact * config.task_score_multiplier_impact + responsibility.significance * config.task_score_multiplier_significance + event.data.urgency * config.task_score_multiplier_urgency,
+                score: event.data.impact * config.task_score_multiplier_impact + event.data.urgency * config.task_score_multiplier_urgency,
                 original_task_id: event.id,
                 increment_counts: {}
             });
