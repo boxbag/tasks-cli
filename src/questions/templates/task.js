@@ -5,7 +5,7 @@ module.exports = function () {
         {
             type: 'input',
             name: 'necessary_reason',
-            message: 'Why do we absolutely need this?',
+            message: 'Why do you absolutely need this?',
             validate: require('../validators/required')
         },
         {
@@ -83,27 +83,14 @@ module.exports = function () {
         {
             type: 'input',
             name: 'automation_task',
-            message: 'How do we automate this task?',
+            message: 'How will you automate this task?',
             validate: require('../validators/required'),
-        },
-        {
-            type: 'confirm',
-            name: 'can_delegate',
-            message: 'Can this task be delegated right now?'
         },
         {
             type: 'input',
             name: 'delegate',
-            message: 'Who do we delegate this to?',
-            validate: require('../validators/required'),
-            when: answers => answers.can_delegate === true
-        },
-        {
-            type: 'input',
-            name: 'reason_cannot_delegate',
-            message: 'Why can\'t you delegate this right now?',
-            validate: require('../validators/required'),
-            when: answers => answers.can_delegate === false
+            message: 'Who will you delegate this to in the future?',
+            validate: require('../validators/required')
         },
         {
             type: 'input',
