@@ -10,7 +10,6 @@
         "start_date": "2018-06-10T17:00:00.000Z",
         "does_stop_recurring": true,
         "recurring_days": [  ],
-        "cannot_automation_reason": "Because we discuss different things every time",
         "can_delegate": false,
         "reason_cannot_delegate": "Because we're still the founders",
         "recurring_count": 0,

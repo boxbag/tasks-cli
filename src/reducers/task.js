@@ -71,7 +71,6 @@ module.exports = (config) => {
                 stop_recurrence_after: event.data.stop_recurrence_after,
                 recurring_days: event.data.recurring_days,
                 automation_task: event.data.automation_task,
-                cannot_automation_reason: event.data.cannot_automation_reason,
                 can_delegate: event.data.can_delegate,
                 delegate: event.data.delegate,
                 reason_cannot_delegate: event.data.reason_cannot_delegate,

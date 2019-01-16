@@ -12,7 +12,6 @@
         "recurring_schedule": "1",
         "does_stop_recurring": true,
         "stop_recurrence_after": 2,
-        "cannot_automation_reason": "Because we discuss different things every time",
         "can_delegate": false,
         "reason_cannot_delegate": "Because we're still the founders",
         "recurring_count": 0,
@@ -38,7 +37,6 @@
         "recurring_schedule": "1",
         "does_stop_recurring": true,
         "stop_recurrence_after": 2,
-        "cannot_automation_reason": "Because we discuss different things every time",
         "can_delegate": false,
         "reason_cannot_delegate": "Because we're still the founders",
         "recurring_count": 1,
@@ -55,7 +53,6 @@
     },
     {
         "can_delegate": false,
-        "cannot_automation_reason": "Because we discuss different things every time",
         "complete_date_start_of_day": "2018-06-29T17:00:00.000Z",
         "completed_date": "2018-06-30T12:21:39.254Z",
         "created": "2018-06-30T12:21:39.254Z",
