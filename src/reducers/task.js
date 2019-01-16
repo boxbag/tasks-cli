@@ -83,6 +83,7 @@ module.exports = (config, responsibilities) => {
                 impact: event.data.impact,
                 estimated_duration: event.data.estimated_duration || config.task_estimated_duration_default_minutes,
                 urgency: event.data.urgency,
+                score: event.data.impact * config.task_score_multiplier_impact + responsibility.significance * config.task_score_multiplier_significance + event.data.urgency * config.task_score_multiplier_urgency,
                 original_task_id: event.id,
                 increment_counts: {}
             });
@@ -130,6 +131,7 @@ module.exports = (config, responsibilities) => {
                         t.should_cancel_on_next_punt = t.punt_count >= config.cancel_punt_count;
                         t.updated = event.created,
                         t.punt_reasons.push(event.data.punt_reason);
+                        t.score += config.task_score_multiplier_punt_count;
                     }
                 });
         } else if (event.name === 'CANCEL_TASK') {
