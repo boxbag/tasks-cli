@@ -2,9 +2,7 @@
 
 const inquirer = require('inquirer');
 
-const responsibilities = require('../views/responsibilities');
-
-const initialTaskQuestions = require('./templates/initial_task')(responsibilities);
+const initialTaskQuestions = require('./templates/initial_task')();
 const taskQuestions = require('./templates/task')();
 
 inquirer.registerPrompt('autocomplete', require('inquirer-autocomplete-prompt'));

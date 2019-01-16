@@ -53,7 +53,7 @@ function calculateShouldRecur (t, tasks, now) {
     return false;
 }
 
-module.exports = (config, responsibilities) => {
+module.exports = (config) => {
     return (tasks, event) => {
         if (event.name === 'CREATE_TASK' && event.data.is_necessary === true) {
             tasks.push({

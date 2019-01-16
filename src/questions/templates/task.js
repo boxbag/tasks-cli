@@ -1,7 +1,5 @@
 'use strict';
 
-const fuzzy = require('fuzzy');
-
 module.exports = function () {
     return [
         {
