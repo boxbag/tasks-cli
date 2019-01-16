@@ -81,23 +81,10 @@ module.exports = function () {
             ]
         },
         {
-            type: 'confirm',
-            name: 'can_automate',
-            message: 'Can this task be automated right now?'
-        },
-        {
             type: 'input',
             name: 'automation_task',
             message: 'How do we automate this task?',
             validate: require('../validators/required'),
-            when: answers => answers.can_automate === true
-        },
-        {
-            type: 'input',
-            name: 'cannot_automation_reason',
-            message: 'Why can\'t we automate this right now?',
-            validate: require('../validators/required'),
-            when: answers => answers.can_automate === false
         },
         {
             type: 'confirm',
