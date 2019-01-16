@@ -12,7 +12,6 @@
         "recurring_schedule": "1",
         "does_stop_recurring": true,
         "stop_recurrence_after": 2,
-        "can_automate": false,
         "cannot_automation_reason": "Because we discuss different things every time",
         "can_delegate": false,
         "reason_cannot_delegate": "Because we're still the founders",
@@ -39,7 +38,6 @@
         "recurring_schedule": "1",
         "does_stop_recurring": true,
         "stop_recurrence_after": 2,
-        "can_automate": false,
         "cannot_automation_reason": "Because we discuss different things every time",
         "can_delegate": false,
         "reason_cannot_delegate": "Because we're still the founders",
@@ -56,7 +54,6 @@
         "original_task_id": "47d2d04d-1b4f-4d38-8f2a-7e4874ee975d"
     },
     {
-        "can_automate": false,
         "can_delegate": false,
         "cannot_automation_reason": "Because we discuss different things every time",
         "complete_date_start_of_day": "2018-06-29T17:00:00.000Z",

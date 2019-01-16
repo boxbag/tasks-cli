@@ -12,7 +12,6 @@
         "recurring_schedule": "1",
         "does_stop_recurring": false,
         "recurring_days": [ 1 ],
-        "can_automate": false,
         "cannot_automation_reason": "Because we discuss different things every time",
         "can_delegate": false,
         "reason_cannot_delegate": "Because we're still the founders",
