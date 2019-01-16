@@ -56,15 +56,12 @@ function calculateShouldRecur (t, tasks, now) {
 module.exports = (config, responsibilities) => {
     return (tasks, event) => {
         if (event.name === 'CREATE_TASK' && event.data.is_necessary === true) {
-            let responsibility = responsibilities.filter(r => r.id === event.data.responsibility)[0];
-
             tasks.push({
                 id: event.id,
                 created: event.created,
                 status: 'PENDING',
                 punt_count: 0,
                 punt_reasons: [],
-                responsibility: event.data.responsibility,
                 name: event.data.name,
                 necessary_reason: event.data.necessary_reason,
                 start_date: moment(event.data.start_date).startOf('day').toDate().toISOString(),
