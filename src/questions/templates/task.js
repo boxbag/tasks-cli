@@ -15,14 +15,6 @@ module.exports = function () {
             format: ['dddd', ' ', 'mm', '/', 'dd', '/', 'yyyy']
         },
         {
-            type: 'input',
-            name: 'estimated_duration',
-            message: 'How many minutes do you expect this task to take?',
-            default: '30',
-            validate: require('../validators/positive_number'),
-            filter: Number
-        },
-        {
             type: 'list',
             name: 'recurring_type',
             message: 'What type of recurrence is this task?',
