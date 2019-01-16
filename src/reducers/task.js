@@ -65,7 +65,6 @@ module.exports = (config, responsibilities) => {
                 punt_count: 0,
                 punt_reasons: [],
                 responsibility: event.data.responsibility,
-                responsibility_name: responsibility.name,
                 name: event.data.name,
                 necessary_reason: event.data.necessary_reason,
                 start_date: moment(event.data.start_date).startOf('day').toDate().toISOString(),
