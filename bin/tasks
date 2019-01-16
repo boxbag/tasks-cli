@@ -7,7 +7,5 @@ program
     .alias('a')
     .command('update', 'Update a task on your todo list')
     .alias('u')
-    .command('plan', 'Generate a plan for the next few days')
-    .alias('p')
 
 program.parse(process.argv);
