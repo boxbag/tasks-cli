@@ -64,6 +64,7 @@ module.exports = (config) => {
                 punt_reasons: [],
                 name: event.data.name,
                 necessary_reason: event.data.necessary_reason,
+                success_metrics: event.data.success_metrics || '',
                 start_date: moment(event.data.start_date).startOf('day').toDate().toISOString(),
                 recurring_type: event.data.recurring_type,
                 recurring_schedule: event.data.recurring_schedule,

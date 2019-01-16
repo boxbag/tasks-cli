@@ -15,6 +15,12 @@ module.exports = function () {
             validate: require('../validators/required')
         },
         {
+            type: 'input',
+            name: 'success_metrics',
+            message: 'How will you measure success?',
+            validate: require('../validators/required')
+        },
+        {
             type: 'confirm',
             name: 'is_necessary',
             message: 'Is this task really necessary?',
