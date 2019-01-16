@@ -12,8 +12,6 @@
         "recurring_schedule": "1",
         "does_stop_recurring": false,
         "recurring_days": [ 1 ],
-        "can_delegate": false,
-        "reason_cannot_delegate": "Because we're still the founders",
         "impact": 7,
         "urgency": 7,
         "score": 707,

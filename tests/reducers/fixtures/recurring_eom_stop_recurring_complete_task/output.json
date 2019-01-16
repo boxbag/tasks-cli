@@ -12,8 +12,6 @@
         "recurring_schedule": "1",
         "does_stop_recurring": true,
         "stop_recurrence_after": 2,
-        "can_delegate": false,
-        "reason_cannot_delegate": "Because we're still the founders",
         "recurring_count": 0,
         "impact": 7,
         "urgency": 7,
@@ -37,8 +35,6 @@
         "recurring_schedule": "1",
         "does_stop_recurring": true,
         "stop_recurrence_after": 2,
-        "can_delegate": false,
-        "reason_cannot_delegate": "Because we're still the founders",
         "recurring_count": 1,
         "impact": 7,
         "urgency": 7,
@@ -52,7 +48,6 @@
         "original_task_id": "47d2d04d-1b4f-4d38-8f2a-7e4874ee975d"
     },
     {
-        "can_delegate": false,
         "complete_date_start_of_day": "2018-06-29T17:00:00.000Z",
         "completed_date": "2018-06-30T12:21:39.254Z",
         "created": "2018-06-30T12:21:39.254Z",
@@ -65,7 +60,6 @@
         "original_task_id": "47d2d04d-1b4f-4d38-8f2a-7e4874ee975d",
         "punt_count": 0,
         "punt_reasons": [],
-        "reason_cannot_delegate": "Because we're still the founders",
         "recurring_count": 2,
         "recurring_schedule": "1",
         "recurring_type": "EOM",

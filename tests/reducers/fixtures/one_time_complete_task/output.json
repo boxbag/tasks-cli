@@ -10,8 +10,6 @@
         "start_date": "2018-06-10T17:00:00.000Z",
         "does_stop_recurring": true,
         "recurring_days": [  ],
-        "can_delegate": false,
-        "reason_cannot_delegate": "Because we're still the founders",
         "recurring_count": 0,
         "impact": 7,
         "urgency": 7,
