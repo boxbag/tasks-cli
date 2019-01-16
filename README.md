@@ -1,5 +1,3 @@
-# xendit-tasks
-
 ## Abstract
 
 Prioritizing tasks is essential to realizing the impact that we want to make in the world. The goal that this tool aims to achieve is not to help the user accomplish the most tasks or even all of his tasks. The goal is to help the user feel confident that they are always working on the highest priority task. In the long run, consistently working on the highest priority task will allow real impact to happen.
