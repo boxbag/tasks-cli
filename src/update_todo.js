@@ -70,4 +70,6 @@ taskUpdatePrinter(updatedTask);
             chosen_todo_item: updatedTask.id
         });
     }
+
+    console.log('\nThanks for the hard work! Remember that this is just one step in your journey\n'.yellow);
 })();

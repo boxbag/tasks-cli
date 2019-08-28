@@ -138,11 +138,17 @@ module.exports = (config) => {
                 .filter(t => t.id === event.data.chosen_todo_item)
                 .forEach(t => {
                     t.increment_counts = t.increment_counts || {};
+                    t.increment_actions = t.increment_actions || [];
 
                     let key = moment(event.created).startOf('day').toDate().toISOString();
 
                     t.increment_counts[key] = t.increment_counts[key] || 0;
                     t.increment_counts[key] += 1;
+
+                    t.increment_actions.unshift({
+                        date: key,
+                        action: event.data.increment_action
+                    });
 
                     t.updated = event.created;
 
