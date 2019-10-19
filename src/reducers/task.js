@@ -146,7 +146,7 @@ module.exports = (config) => {
                     t.increment_counts[key] += 1;
 
                     t.increment_actions.unshift({
-                        date: key,
+                        date: event.created,
                         action: event.data.increment_action
                     });
 

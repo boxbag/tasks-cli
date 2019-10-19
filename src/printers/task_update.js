@@ -9,7 +9,7 @@ module.exports = task => {
 
     if (task.increment_actions && task.increment_actions.length > 0) {
         let incrementActions = task.increment_actions.slice(0, 3).map(incrementAction => {
-            return `${colors.bold.underline.white(new Date(incrementAction.date).toLocaleDateString('en-us', { weekday: 'short', year: 'numeric', month: 'numeric', day: 'numeric' }))} - ${colors.bold.yellow(incrementAction.action)}`;
+            return `${colors.bold.underline.white(new Date(incrementAction.date).toLocaleDateString('en-us', { weekday: 'short', year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric' }))} - ${colors.bold.yellow(incrementAction.action)}`;
         }).join('\n');
 
         console.log(`${incrementActions}\n`);
