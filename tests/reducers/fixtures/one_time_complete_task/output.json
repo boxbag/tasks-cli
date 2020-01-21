@@ -11,6 +11,12 @@
         "does_stop_recurring": true,
         "recurring_days": [  ],
         "recurring_count": 0,
+        "increment_actions": [
+            {
+                "date": "2018-05-29T12:21:39.254Z",
+                "action": "Did the meeting"
+            }
+        ],
         "impact": 7,
         "urgency": 7,
         "score": 707,

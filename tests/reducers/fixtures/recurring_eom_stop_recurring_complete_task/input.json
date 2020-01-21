@@ -28,15 +28,17 @@
         "created": "2018-05-29T12:21:39.254Z",
         "name": "COMPLETE_TASK",
         "data": {
-            "chosen_todo_item": "47d2d04d-1b4f-4d38-8f2a-7e4874ee975d"
+            "chosen_todo_item": "47d2d04d-1b4f-4d38-8f2a-7e4874ee975d",
+            "complete_action": "Do A"
         }
     },
     {
         "id": "7575ceb5-9f70-4220-bd57-8bc510584261",
-        "created": "2018-06-30T12:21:39.254Z",
+        "created": "2018-06-30T12:39:39.254Z",
         "name": "COMPLETE_TASK",
         "data": {
-            "chosen_todo_item": "7575ceb5-9f70-4220-bd57-8bc510584261"
+            "chosen_todo_item": "7575ceb5-9f70-4220-bd57-8bc510584261",
+            "complete_action": "Do B"
         }
     }
 ]

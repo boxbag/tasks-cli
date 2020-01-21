@@ -90,6 +90,12 @@ module.exports = (config) => {
                     t.complete_action = event.data.complete_action;
                     t.actual_duration = event.data.actual_duration;
                     t.recurring_count = t.recurring_count || 0;
+                    t.increment_actions = t.increment_actions || [];
+
+                    t.increment_actions.unshift({
+                        date: event.created,
+                        action: event.data.complete_action
+                    });
 
                     let recurrence = calculateShouldRecur(t, tasks, event.created);
 
@@ -101,9 +107,15 @@ module.exports = (config) => {
                         clonedTask.status = 'PENDING';
                         clonedTask.id = event.id;
                         clonedTask.created = event.created;
+                        clonedTask.updated = event.created;
                         clonedTask.original_task_id = t.original_task_id;
                         clonedTask.punt_count = 0;
                         clonedTask.should_cancel_on_next_punt = false;
+
+                        delete clonedTask.complete_action;
+                        delete clonedTask.actual_duration;
+                        delete clonedTask.completed_date;
+                        delete clonedTask.complete_date_start_of_day;
 
                         tasks.push(clonedTask);
                     }

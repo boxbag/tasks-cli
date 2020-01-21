@@ -18,7 +18,18 @@
         "score": 707,
         "original_task_id": "47d2d04d-1b4f-4d38-8f2a-7e4874ee975d",
         "increment_counts": {},
+        "increment_actions": [
+            {
+                "action": "Do B",
+                "date": "2018-06-30T12:39:39.254Z"
+            },
+            {
+                "action": "Do A",
+                "date": "2018-05-29T12:21:39.254Z"
+            }
+        ],
         "updated": "2018-05-29T12:21:39.254Z",
+        "complete_action": "Do A",
         "completed_date": "2018-05-29T12:21:39.254Z",
         "complete_date_start_of_day": "2018-05-28T17:00:00.000Z",
         "success_metrics": ""
@@ -42,21 +53,40 @@
         "score": 707,
         "original_task_id": "47d2d04d-1b4f-4d38-8f2a-7e4874ee975d",
         "increment_counts": {},
-        "updated": "2018-06-30T12:21:39.254Z",
-        "completed_date": "2018-06-30T12:21:39.254Z",
+        "updated": "2018-06-30T12:39:39.254Z",
+        "increment_actions": [
+            {
+                "action": "Do B",
+                "date": "2018-06-30T12:39:39.254Z"
+            },
+            {
+                "action": "Do A",
+                "date": "2018-05-29T12:21:39.254Z"
+            }
+        ],
+        "complete_action": "Do B",
+        "completed_date": "2018-06-30T12:39:39.254Z",
         "complete_date_start_of_day": "2018-06-29T17:00:00.000Z",
         "should_cancel_on_next_punt": false,
         "original_task_id": "47d2d04d-1b4f-4d38-8f2a-7e4874ee975d",
         "success_metrics": ""
     },
     {
-        "complete_date_start_of_day": "2018-06-29T17:00:00.000Z",
-        "completed_date": "2018-06-30T12:21:39.254Z",
-        "created": "2018-06-30T12:21:39.254Z",
+        "created": "2018-06-30T12:39:39.254Z",
         "does_stop_recurring": true,
         "id": "7575ceb5-9f70-4220-bd57-8bc510584261",
         "impact": 7,
         "increment_counts": {},
+        "increment_actions": [
+            {
+                "action": "Do B",
+                "date": "2018-06-30T12:39:39.254Z"
+            },
+            {
+                "action": "Do A",
+                "date": "2018-05-29T12:21:39.254Z"
+            }
+        ],
         "name": "Attend founders meeting",
         "necessary_reason": "Because we need to discuss a wide range of issues that face Xendit",
         "original_task_id": "47d2d04d-1b4f-4d38-8f2a-7e4874ee975d",
@@ -69,7 +99,7 @@
         "start_date": "2018-07-31",
         "status": "PENDING",
         "stop_recurrence_after": 2,
-        "updated": "2018-06-30T12:21:39.254Z",
+        "updated": "2018-06-30T12:39:39.254Z",
         "urgency": 7,
         "score": 707,
         "success_metrics": ""

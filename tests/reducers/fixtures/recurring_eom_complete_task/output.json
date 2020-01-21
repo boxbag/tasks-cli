@@ -17,7 +17,14 @@
         "score": 707,
         "original_task_id": "47d2d04d-1b4f-4d38-8f2a-7e4874ee975d",
         "increment_counts": {},
+        "increment_actions": [
+            {
+                "action": "Do the task",
+                "date": "2018-05-29T12:21:39.254Z"
+            }
+        ],
         "updated": "2018-05-29T12:21:39.254Z",
+        "complete_action": "Do the task",
         "completed_date": "2018-05-29T12:21:39.254Z",
         "complete_date_start_of_day": "2018-05-28T17:00:00.000Z",
         "success_metrics": ""
@@ -40,9 +47,13 @@
         "score": 707,
         "original_task_id": "47d2d04d-1b4f-4d38-8f2a-7e4874ee975d",
         "increment_counts": {},
+        "increment_actions": [
+            {
+                "action": "Do the task",
+                "date": "2018-05-29T12:21:39.254Z"
+            }
+        ],
         "updated": "2018-05-29T12:21:39.254Z",
-        "completed_date": "2018-05-29T12:21:39.254Z",
-        "complete_date_start_of_day": "2018-05-28T17:00:00.000Z",
         "should_cancel_on_next_punt": false,
         "original_task_id": "47d2d04d-1b4f-4d38-8f2a-7e4874ee975d",
         "success_metrics": ""
