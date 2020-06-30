@@ -54,6 +54,8 @@ function calculateShouldRecur (t, tasks, now) {
 }
 
 module.exports = (config) => {
+    const taskIndexes = {};
+
     return (tasks, event) => {
         if (event.name === 'CREATE_TASK' && event.data.is_necessary === true) {
             tasks.push({
@@ -79,95 +81,107 @@ module.exports = (config) => {
                 original_task_id: event.id,
                 increment_counts: {}
             });
+
+            taskIndexes[event.id] = tasks.length - 1;
         } else if (event.name === 'COMPLETE_TASK') {
-            tasks
-                .filter(t => t.id === event.data.chosen_todo_item)
-                .forEach(t => {
-                    t.status = 'COMPLETED';
-                    t.updated = event.created;
-                    t.completed_date = event.created;
-                    t.complete_date_start_of_day = moment(event.created).startOf('day').toDate();
-                    t.complete_action = event.data.complete_action;
-                    t.actual_duration = event.data.actual_duration;
-                    t.recurring_count = t.recurring_count || 0;
-                    t.increment_actions = t.increment_actions || [];
+            const t = tasks[taskIndexes[event.data.chosen_todo_item]];
 
-                    t.increment_actions.unshift({
-                        date: event.created,
-                        action: event.data.complete_action
-                    });
+            if (t === undefined) {
+                return tasks;
+            }
 
-                    let recurrence = calculateShouldRecur(t, tasks, event.created);
+            t.status = 'COMPLETED';
+            t.updated = event.created;
+            t.completed_date = event.created;
+            t.complete_date_start_of_day = moment(event.created).startOf('day').toDate();
+            t.complete_action = event.data.complete_action;
+            t.actual_duration = event.data.actual_duration;
+            t.recurring_count = t.recurring_count || 0;
+            t.increment_actions = t.increment_actions || [];
 
-                    if (typeof recurrence === 'string') {
-                        let clonedTask = _.clone(t);
+            t.increment_actions.unshift({
+                date: event.created,
+                action: event.data.complete_action
+            });
 
-                        clonedTask.start_date = recurrence;
-                        clonedTask.recurring_count = clonedTask.recurring_count + 1;
-                        clonedTask.status = 'PENDING';
-                        clonedTask.id = event.id;
-                        clonedTask.created = event.created;
-                        clonedTask.updated = event.created;
-                        clonedTask.original_task_id = t.original_task_id;
-                        clonedTask.punt_count = 0;
-                        clonedTask.should_cancel_on_next_punt = false;
+            let recurrence = calculateShouldRecur(t, tasks, event.created);
 
-                        delete clonedTask.complete_action;
-                        delete clonedTask.actual_duration;
-                        delete clonedTask.completed_date;
-                        delete clonedTask.complete_date_start_of_day;
+            if (typeof recurrence === 'string') {
+                let clonedTask = _.clone(t);
 
-                        tasks.push(clonedTask);
-                    }
-                });
+                clonedTask.start_date = recurrence;
+                clonedTask.recurring_count = clonedTask.recurring_count + 1;
+                clonedTask.status = 'PENDING';
+                clonedTask.id = event.id;
+                clonedTask.created = event.created;
+                clonedTask.updated = event.created;
+                clonedTask.original_task_id = t.original_task_id;
+                clonedTask.punt_count = 0;
+                clonedTask.should_cancel_on_next_punt = false;
+
+                delete clonedTask.complete_action;
+                delete clonedTask.actual_duration;
+                delete clonedTask.completed_date;
+                delete clonedTask.complete_date_start_of_day;
+
+                tasks.push(clonedTask);
+
+                taskIndexes[clonedTask.id] = tasks.length - 1;
+            }
         } else if (event.name === 'PUNT_TASK') {
-            tasks
-                .filter(t => t.id === event.data.chosen_todo_item)
-                .forEach(t => {
-                    if (t.should_cancel_on_next_punt && event.data.confirm_punt_over_count === true) {
-                        t.status = 'CANCELLED';
-                        t.cancellation_reason = 'OVER_PUNT_COUNT';
-                    } else {
-                        t.status = 'PENDING';
-                        t.start_date = moment(event.data.new_start_date).startOf('day').toDate().toISOString();
-                        t.punt_count += 1;
-                        t.should_cancel_on_next_punt = t.punt_count >= config.cancel_punt_count;
-                        t.updated = event.created,
-                        t.punt_reasons.push(event.data.punt_reason);
-                        t.score += config.task_score_multiplier_punt_count;
-                    }
-                });
+            const t = tasks[taskIndexes[event.data.chosen_todo_item]];
+
+            if (t === undefined) {
+                return tasks;
+            }
+
+            if (t.should_cancel_on_next_punt && event.data.confirm_punt_over_count === true) {
+                t.status = 'CANCELLED';
+                t.cancellation_reason = 'OVER_PUNT_COUNT';
+            } else {
+                t.status = 'PENDING';
+                t.start_date = moment(event.data.new_start_date).startOf('day').toDate().toISOString();
+                t.punt_count += 1;
+                t.should_cancel_on_next_punt = t.punt_count >= config.cancel_punt_count;
+                t.updated = event.created,
+                t.punt_reasons.push(event.data.punt_reason);
+                t.score += config.task_score_multiplier_punt_count;
+            }
         } else if (event.name === 'CANCEL_TASK') {
-            tasks
-                .filter(t => t.id === event.data.chosen_todo_item)
-                .forEach(t => {
-                    t.status = 'CANCELLED';
-                    t.updated = event.created;
-                    t.cancellation_reason = event.data.cancellation_reason
-                });
+            const t = tasks[taskIndexes[event.data.chosen_todo_item]];
+            
+            if (t === undefined) {
+                return tasks;
+            }
+
+            t.status = 'CANCELLED';
+            t.updated = event.created;
+            t.cancellation_reason = event.data.cancellation_reason
         } else if (event.name === 'INCREMENT_TASK') {
-            tasks
-                .filter(t => t.id === event.data.chosen_todo_item)
-                .forEach(t => {
-                    t.increment_counts = t.increment_counts || {};
-                    t.increment_actions = t.increment_actions || [];
+            const t = tasks[taskIndexes[event.data.chosen_todo_item]];
+            
+            if (t === undefined) {
+                return tasks;
+            }
+            
+            t.increment_counts = t.increment_counts || {};
+            t.increment_actions = t.increment_actions || [];
 
-                    let key = moment(event.created).startOf('day').toDate().toISOString();
+            let key = moment(event.created).startOf('day').toDate().toISOString();
 
-                    t.increment_counts[key] = t.increment_counts[key] || 0;
-                    t.increment_counts[key] += 1;
+            t.increment_counts[key] = t.increment_counts[key] || 0;
+            t.increment_counts[key] += 1;
 
-                    t.increment_actions.unshift({
-                        date: event.created,
-                        action: event.data.increment_action
-                    });
+            t.increment_actions.unshift({
+                date: event.created,
+                action: event.data.increment_action
+            });
 
-                    t.updated = event.created;
+            t.updated = event.created;
 
-                    if (event.data.next_check_date) {
-                        t.start_date = moment(event.data.next_check_date).startOf('day').toDate().toISOString()
-                    }
-                });
+            if (event.data.next_check_date) {
+                t.start_date = moment(event.data.next_check_date).startOf('day').toDate().toISOString()
+            }
         }
 
         return tasks;    
