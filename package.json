@@ -10,7 +10,7 @@
     "inquirer-autocomplete-prompt": "^0.12.2",
     "inquirer-datepicker-prompt": "^0.4.2",
     "mocha": "^5.2.0",
-    "moment": "^2.22.2",
+    "moment": "^2.29.4",
     "underscore": "^1.9.1",
     "uuid": "^3.3.2"
   },
